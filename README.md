@@ -10,8 +10,6 @@ Demo
 
 rails new spree_mail_example; cd spree_mail_example; echo "gem 'spree', '0.40.2'" >> Gemfile; echo "gem 'spree_mail', :path => '~/RoR/gems'" >> Gemfile; rm public/index.html; bundle install; rake spree:install spree_mail:install db:migrate db:seed; rails s
 
-#rake spree_sample:install db:sample
-
 
 
 
