@@ -1,0 +1,11 @@
+<p>
+  <%= form.label :name %><br/>
+  <%= form.text_field :name, :class => 'title required' %>
+</p>
+<p>
+  <%= form.label :email %><br/>
+  <%= form.text_field :email, :class => 'title required' %>
+</p>
+<p class="action">
+  <%= form.submit t("sign_up") %>
+</p>

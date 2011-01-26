@@ -1,0 +1,8 @@
+<% content_for :sub_menu do %>
+  <ul id="sub_nav">
+    <%= hook :admin_email_sub_tabs do %>
+      <%= tab :emails, :match_path => '/emails' %>
+      <%= tab :subscribers, :match_path => '/subscribers', :css_class => 'last' %>
+    <% end %>
+  </ul>
+<% end %>

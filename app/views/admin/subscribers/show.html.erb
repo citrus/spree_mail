@@ -1,0 +1,16 @@
+<%= render 'admin/shared/spree_mail_sub_nav' %>
+
+<h1><%= t("show_subscriber") %></h1>
+
+  <h5>Name:</h5>
+  <h3><%= @subscriber.name %></h3>
+  
+  <h5>Email:</h5>
+  <h3><%= mail_to @subscriber.email %></h3>
+
+<hr/>
+
+<p>
+  <%= link_to_edit @subscriber %> <%= t('or') %>
+  <%= link_to t('back'), collection_url %>
+</p>

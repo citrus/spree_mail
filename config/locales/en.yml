@@ -1,0 +1,23 @@
+en:
+  spree_mail: Spree Mail
+  newsletter_sign_up: Sign up for our Newsletter
+  
+  subscribers: Subscribers
+  listing_subscribers: Listing Subscribers
+  show_subscriber: Show Subscriber
+  new_subscriber: New Subscriber
+  editing_subscriber: Editing Subscriber
+  
+  
+  listing_emails: Listing Emails
+  show_email: Show Email
+  new_email: New Email
+  editing_email: Editing Email
+  
+  emails: Emails
+  
+  subject: Subject
+  message_body: Message Body
+  
+  
+  to: To

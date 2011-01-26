@@ -1,0 +1,19 @@
+<%- locals = {:f => f} %>
+
+<%= hook :admin_subscriber_form_fields, locals do %>
+  
+  <%= render "shared/error_messages", :target => @subscriber %>
+  
+  <%= f.field_container :name do %>
+    <%= f.label :name, t("name") %><br />
+    <%= f.text_field :name, :class => 'title' %>
+    <%= error_message_on :subscriber, :name %>
+  <% end %>
+  
+  <%= f.field_container :email do %>
+    <%= f.label :email, t("email") %><br />
+    <%= f.text_field :email, :class => 'title' %>
+    <%= error_message_on :subscriber, :email %>
+  <% end %>
+  
+<% end %>

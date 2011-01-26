@@ -1,0 +1,15 @@
+<%= render 'admin/shared/spree_mail_sub_nav' %>
+
+<%= hook :admin_subscriber_new_form_header do %>
+  <h1><%= t("new_subscriber") %></h1>
+<% end %>
+
+<%= hook :admin_subscriber_new_form do %>
+  <%= form_for(:subscriber, :url => collection_url) do |f| %>
+    <%= render :partial => "form", :locals => { :f => f } %>
+
+    <%= hook :admin_subscriber_new_form_buttons do %>
+      <%= render :partial => "admin/shared/new_resource_links" %>
+    <% end %>
+  <% end %>
+<% end %>

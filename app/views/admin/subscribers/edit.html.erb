@@ -1,0 +1,15 @@
+<%= render 'admin/shared/spree_mail_sub_nav' %>
+
+<%= hook :admin_subscriber_edit_form_header do %>
+  <h1><%= t("editing_subscriber") %></h1>
+<% end %>
+
+<%= hook :admin_subscriber_edit_form do %>
+  <%= form_for(:subscriber, :url => object_url, :html => { :method => :put }) do |f| %>
+    <%= render :partial => "form", :locals => { :f => f } %>
+
+    <%= hook :admin_subscriber_edit_form_buttons do %>
+      <%= render :partial => "admin/shared/edit_resource_links" %>
+    <% end %>
+  <% end %>
+<% end %>

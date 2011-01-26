@@ -1,0 +1,18 @@
+<div class="left">
+  
+  <%= hook :subscriber_static_content do %>
+    <%= render 'hooks/subscriber_static_content' %>
+  <% end %>
+  
+</div>
+
+<div class="right">
+  
+  <%= hook :subscriber_sign_up_form do %>
+    <%= render 'hooks/subscriber_sign_up_form' %>
+  <% end %>
+  
+</div>
+
+<div class="clear">&nbsp;</div>
+
