@@ -9,7 +9,7 @@ To customize Spree Mail's html template, copy `email.html.erb` to your local lay
 Demo
 ----
 
-rails new spree_mail_example; cd spree_mail_example; echo "gem 'spree', '0.40.2'" >> Gemfile; echo "gem 'spree_mail', '0.40.0.1'" >> Gemfile; rm public/index.html; bundle install; rake spree:install spree_mail:install db:migrate db:seed; 
+`rails new spree_mail_example; cd spree_mail_example; echo "gem 'spree', '0.40.2'" >> Gemfile; echo "gem 'spree_mail', '0.40.0.1'" >> Gemfile; rm public/index.html; bundle install; rake spree:install spree_mail:install db:migrate db:seed`
 
 `rake db:sample` if you want to...
 
