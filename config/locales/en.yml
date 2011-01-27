@@ -7,7 +7,13 @@ en:
   show_subscriber: Show Subscriber
   new_subscriber: New Subscriber
   editing_subscriber: Editing Subscriber
+  view_unsubscribed: View Unsubscribed
+  view_all_subscribers: View All Subscribers
   
+  resubscribe_success: "Successfully Resubscribed"
+  resubscribe_failed: "Resubscribe Failed"
+  unsubscribe_success: "Successfully Unsubscribed"
+  unsubscribe_failed: "Unsubscribed failed"
   
   listing_emails: Listing Emails
   show_email: Show Email
@@ -16,8 +22,12 @@ en:
   
   emails: Emails
   
+  to: To
+  send: Send
   subject: Subject
   message_body: Message Body
   
+  delivery_success: Your email was successfully sent!
+  delivery_failed: Sorry, your email could not be sent.
   
-  to: To
+  

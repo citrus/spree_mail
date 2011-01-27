@@ -1,20 +1,20 @@
 <%= render 'admin/shared/spree_mail_sub_nav' %>
 
-
 <h1><%= t("show_email") %></h1>
 
-<h5>To:</h5>
+<h5>To: (<%= @email.recipients.length %>)</h5>
 <p><%= @email.recipient_list %></p>
 
 <h5>Subject:</h5>
 <p><%= @email.subject %></p>
 
 <h5>Body:</h5>
-<%= @email.body.html_safe %>
+<%= simple_format @email.body %>
 
 <hr/>
 
 <p>
+  <%= link_to (image_tag("admin/icons/email.png") + " " + t("send")), deliver_admin_email_path(@email) %> &nbsp;
   <%= link_to_edit @email %> <%= t('or') %>
   <%= link_to t('back'), collection_url %>
 </p>

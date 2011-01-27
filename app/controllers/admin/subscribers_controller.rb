@@ -11,10 +11,6 @@ class Admin::SubscribersController < Admin::BaseController
 
   destroy.success.wants.js { render_js_for_destroy }
 
-
-  before_filter :approval_setup, :only => [ :approve, :reject ]
-
-
   create.response do |wants|
     wants.html { redirect_to admin_subscribers_path }
   end
@@ -23,7 +19,35 @@ class Admin::SubscribersController < Admin::BaseController
     wants.html { redirect_to admin_subscribers_path }
   end
 
-  
+  def resubscribe
+    @subscriber = object
+    if @subscriber.resubscribe!
+      flash[:notice] = t("resubscribe_success")
+    else
+      flash[:error] = t("resubscribe_failed")
+    end
+    redirect_to request.referer
+  end
+    
+  def unsubscribe
+    @subscriber = object
+    if @subscriber.unsubscribe!
+      flash[:notice] = t("unsubscribe_success")
+    else
+      flash[:error] = t("unsubscribe_failed")
+    end
+    redirect_to request.referer
+  end
+
+  def unsubscribed
+    @search = Subscriber.searchlogic(params[:search])
+    
+    #set order by to default or form result
+    @search.order ||= "ascend_by_name"
+
+    @subscribers = @collection = @search.do_search.unsubscribed.paginate(:per_page => Spree::Config[:admin_products_per_page], :page => params[:page])
+    render :template => 'admin/subscribers/index'
+  end
 
 
   private
@@ -43,16 +67,12 @@ class Admin::SubscribersController < Admin::BaseController
 
   def collection
     return @collection if @collection.present?
-    unless request.xhr?
-      @search = Subscriber.searchlogic(params[:search])
+    @search = Subscriber.searchlogic(params[:search])
+    
+    #set order by to default or form result
+    @search.order ||= "ascend_by_name"
 
-      #set order by to default or form result
-      @search.order ||= "ascend_by_name"
-
-      @collection = @search.do_search.paginate(:per_page => Spree::Config[:admin_products_per_page], :page => params[:page])
-
-    else
-      @collection = Subscriber.where("wholesalers.name like :search", {:search => "#{params[:q].strip}%"}).limit(params[:limit] || 100)
-    end
+    @collection = @search.do_search.active.paginate(:per_page => Spree::Config[:admin_products_per_page], :page => params[:page])
+    
   end  
 end

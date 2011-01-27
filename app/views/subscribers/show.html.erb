@@ -1,0 +1,16 @@
+<h1>Unsubscribe from our Mailing List</h1>
+
+<p>Please enter your email address below:</p>
+
+<% token = Digest::SHA1.hexdigest(Time.now.to_s) %>
+<%= form_for @subscriber, :url => unsubscribe_subscriber_path(@subscriber.token) do |form| %>
+  <p>
+    <%= form.label :email %>
+    <%= form.text_field :email, :value => "" %>
+    <%= form.hidden_field :token, :value => token %>
+  </p>
+  <p>
+    <%= form.submit "Unsubscribe" %> or
+    <%= link_to "Cancel", root_path %>
+  </p>
+<% end %>

@@ -1,16 +1,20 @@
 class Email < ActiveRecord::Base
   
+  validates :to,      :presence => true
   validates :subject, :presence => true
-  validates :body, :presence => true
-
+  validates :body,    :presence => true
+  
+  before_create :set_token
+  
   def to=(value)
-  
-    puts "----"
-    puts value
-  
     value = {} unless value.is_a? Hash
     value.delete("0")
+    return false if value.empty?    
     write_attribute :to, value.inspect
+  end
+  
+  def from
+    MailMethod.current.preferred_mails_from rescue "no-reply@spree-mail-example.com"
   end
   
   def recipients
@@ -20,6 +24,54 @@ class Email < ActiveRecord::Base
   
   def recipient_list
     recipients.join(", ")
+  end
+
+  def deliver!
+    count = 0
+    recipients.each do |email|
+      subscriber = Subscriber.find_by_email(email) rescue nil
+      if subscriber
+        mail = EmailMailer.with_layout(self, subscriber)
+        count += 1 if mail && mail.deliver!
+      end
+    end   
+    return 0 < count, count
+  end
+  
+  
+  
+  def render(attribute, subscriber)
+    Mustache.render(self.send(attribute), subscriber.attributes)
+  end
+  
+  private
+ 
+    def set_token
+      write_attribute :token, Digest::SHA1.hexdigest(Time.now.to_s)
+    end
+  
+    
+  class << self
+    
+    def new(parameters={})
+      parameters ||= {}
+      super(parameters.reverse_merge!(:body => template))
+    end
+  
+    def template
+      txt=<<TXT
+Hello {{name}},
+  
+
+  
+Regards,
+
+#{Spree::Config[:site_name]}
+    
+TXT
+    end
+    
+    
   end
 
 end

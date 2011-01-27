@@ -2,26 +2,27 @@ class Admin::EmailsController < Admin::BaseController
   
   resource_controller
   
-  #include SpreeSubscribe::EmailController
-  
   before_filter :check_json_authenticity, :only => :index
-  
   before_filter :get_subscribers, :only => [:new, :create, :edit, :update]
-  
-  
-  def get_subscribers
-   @subscribers = Subscriber.all
-  end
   
   index.response do |wants|
     wants.html { render :action => :index }
     wants.json { render :json => json_data }
   end
-
   destroy.success.wants.js { render_js_for_destroy }
 
 
-  before_filter :approval_setup, :only => [ :approve, :reject ]
+  def deliver
+    @email = Email.find(params[:id])
+    sent, count = @email.deliver!
+    if sent
+      flash[:notice] = t('delivery_success', count)
+    else
+      flash[:error] = t('delivery_failed', count)
+    end
+    redirect_to admin_email_path(@email)
+  end 
+
 
 
   private
@@ -39,6 +40,10 @@ class Admin::EmailsController < Admin::BaseController
   #  end
   #end
 
+  def get_subscribers
+   @subscribers = Subscriber.active
+  end
+  
   def collection
     return @collection if @collection.present?
     unless request.xhr?

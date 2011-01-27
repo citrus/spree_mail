@@ -21,4 +21,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency('spree_core', '>= 0.40.2')
   s.add_dependency('spree_auth', '>= 0.40.2')
+  s.add_dependency('mustache', '>= 0.12.0')
+  
 end

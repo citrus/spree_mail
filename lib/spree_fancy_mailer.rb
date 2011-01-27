@@ -1,3 +1,0 @@
-module SpreeFancyMailer
-  # Your code goes here...
-end

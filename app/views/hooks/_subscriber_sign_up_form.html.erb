@@ -1,3 +1,4 @@
+<%= render "shared/error_messages", :target => @subscriber %>
 <%= form_for @subscriber do |form| %>
   <%= render 'subscribers/fields', :form => form %>
 <% end %>

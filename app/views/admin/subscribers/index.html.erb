@@ -3,7 +3,14 @@
 <div class='toolbar'>
   <ul class='actions'>
     <li>
-      <p><%= button_link_to t("new_subscriber"), new_object_url, :icon => 'add' %></p>
+      <p>
+        <% if controller.action_name == 'unsubscribed' %>
+          <%= button_link_to t("view_all_subscribers"), admin_subscribers_path %>
+        <% else %>
+          <%= button_link_to t("view_unsubscribed"), unsubscribed_admin_subscribers_path %>
+        <% end %>        
+        <%= button_link_to t("new_subscriber"), new_object_url, :icon => 'add' %>
+      </p>
     </li>
   </ul>
   <br class='clear' />
@@ -35,6 +42,7 @@
           <%= hook :admin_subscribers_index_row_actions, locals do %>
             <%= link_to_edit subscriber %> &nbsp;
             <%= link_to_delete subscriber %> &nbsp;
+            <%= render 'options', :subscriber => subscriber %>
           <% end %>
         </td>
       </tr>

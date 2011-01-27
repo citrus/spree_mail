@@ -1,3 +1,4 @@
+require 'mustache'
 require 'spree_mail/version'
 require 'spree_mail/custom_hooks'
 
@@ -11,13 +12,13 @@ module SpreeMail
       app.middleware.insert_after ::ActionDispatch::Static, ::ActionDispatch::Static, "#{config.root}/public"
     end
 
-    def self.activate
-      Dir["../app/**/*.rb"].each do |c|
-        puts c
-        #Rails.env.production? ? require(c) : load(c)
-      end
-    end
+    #def self.activate
+    #  #Dir["../app/**/*.rb"].each do |c|
+    #  #  puts c
+    #  #  #Rails.env.production? ? require(c) : load(c)
+    #  #end
+    #end
 
-    config.to_prepare &method(:activate).to_proc
+    #config.to_prepare &method(:activate).to_proc
   end
 end
