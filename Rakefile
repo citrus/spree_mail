@@ -1,29 +1,29 @@
 require 'bundler'
-#require 'rake/testtask'
+require 'rake/testtask'
 Bundler::GemHelper.install_tasks
 
-#Rake::TestTask.new do |t|
-#  t.libs << "lib"
-#  t.pattern = 'test/**/*_test.rb'
-#  t.verbose = true
-#end
-
-
-task :test do
-
-  root = ENV["RAILS_ROOT"] || File.expand_path('../spec/test_app', __FILE__)
-  env = File.join(root, 'config', 'environment.rb')
-  puts "(Rails Root: #{root})"
-
-  require env
-  require File.expand_path('../test/test_helper', __FILE__)
-  Dir["test/**/*.rb"].reject{|file| file.match(/test_helper/) != nil }.each do |file|
-    puts "Loading #{file}"
-    load file
-  end
-  
+Rake::TestTask.new do |t|
+  t.libs << "lib"
+  t.pattern = 'test/**/*_test.rb'
+  t.verbose = true
 end
 
+
+#task :test do
+#
+#  root = ENV["RAILS_ROOT"] || File.expand_path('../spec/test_app', __FILE__)
+#  env = File.join(root, 'config', 'environment.rb')
+#  puts "(Rails Root: #{root})"
+#
+#  require env
+#  require File.expand_path('../test/test_helper', __FILE__)
+#  Dir["test/**/*.rb"].reject{|file| file.match(/test_helper/) != nil }.each do |file|
+#    puts "Loading #{file}"
+#    load file
+#  end
+#  
+#end
+#
 
 
 

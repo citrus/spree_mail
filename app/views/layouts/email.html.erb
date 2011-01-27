@@ -21,7 +21,7 @@
       <td>
         <table cellpadding="15" cellspacing="0" border="0" align="center" width="100%">      
           <tr>
-            <td><%= link_to image_tag(@base_url + Spree::Config[:logo], :alt => Spree::Config[:site_name]), root_url %></td>
+            <td><%= link_to image_tag(@base_url + Spree::Config[:logo], :alt => Spree::Config[:site_name], :style => "border: 0"), root_url %></td>
             <td align="right">
               <p><%= @email.created_at.strftime("%B %d, %Y").downcase.capitalize.gsub(/\s0/, " ") %></p>
               <p><b>Subject:</b> <%= @email_subject %></p>
