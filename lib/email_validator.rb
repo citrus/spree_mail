@@ -1,3 +1,4 @@
+encoding: binary
 # lib/email_validator.rb
 class EmailValidator < ActiveModel::EachValidator
 
