@@ -6,7 +6,7 @@ class Subscriber < ActiveRecord::Base
   scope :unsubscribed, where("unsubscribed_at IS NOT NULL").order(:name)
   
   validates :name,  :presence => true
-  validates :email, :uniqueness => true
+  validates :email, :email => true, :uniqueness => true
   
   before_create :set_token
   
