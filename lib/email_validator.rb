@@ -1,27 +1,21 @@
-# lib/email_validator.rb
+require 'mail'
 class EmailValidator < ActiveModel::EachValidator
-
-  EmailAddress = begin
-                   qtext = '[^\\x0d\\x22\\x5c\\x80-\\xff]'
-                   dtext = '[^\\x0d\\x5b-\\x5d\\x80-\\xff]'
-                   atom = '[^\\x00-\\x20\\x22\\x28\\x29\\x2c\\x2e\\x3a-' +
-                     '\\x3c\\x3e\\x40\\x5b-\\x5d\\x7f-\\xff]+'
-                   quoted_pair = '\\x5c[\\x00-\\x7f]'
-                   domain_literal = "\\x5b(?:#{dtext}|#{quoted_pair})*\\x5d"
-                   quoted_string = "\\x22(?:#{qtext}|#{quoted_pair})*\\x22"
-                   domain_ref = atom
-                   sub_domain = "(?:#{domain_ref}|#{domain_literal})"
-                   word = "(?:#{atom}|#{quoted_string})"
-                   domain = "#{sub_domain}(?:\\x2e#{sub_domain})*"
-                   local_part = "#{word}(?:\\x2e#{word})*"
-                   addr_spec = "#{local_part}\\x40#{domain}"
-                   pattern = '/\A#{addr_spec}\z/'
-                 end
-
-  def validate_each(record, attribute, value)
-    unless value =~ EmailAddress
-      record.errors[attribute] << (options[:message] || "is not valid") 
+  def validate_each(record,attribute,value)
+    begin
+      m = Mail::Address.new(value)
+      # We must check that value contains a domain and that value is an email address
+      r = m.domain && m.address == value
+      t = m.__send__(:tree)
+      # We need to dig into treetop
+      # A valid domain must have dot_atom_text elements size > 1
+      # user@localhost is excluded
+      # treetop must respond to domain
+      # We exclude valid email values like <user@localhost.com>
+      # Hence we use m.__send__(tree).domain
+      r &&= (t.domain.dot_atom_text.elements.size > 1)
+    rescue Exception => e   
+      r = false
     end
+    record.errors[attribute] << (options[:message] || "is invalid") unless r
   end
-
 end
