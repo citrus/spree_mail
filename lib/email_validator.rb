@@ -1,4 +1,3 @@
-$KCODE = "BINARY"
 # lib/email_validator.rb
 class EmailValidator < ActiveModel::EachValidator
 
@@ -16,7 +15,7 @@ class EmailValidator < ActiveModel::EachValidator
                    domain = "#{sub_domain}(?:\\x2e#{sub_domain})*"
                    local_part = "#{word}(?:\\x2e#{word})*"
                    addr_spec = "#{local_part}\\x40#{domain}"
-                   pattern = /\A#{addr_spec}\z/
+                   pattern = '/\A#{addr_spec}\z/'
                  end
 
   def validate_each(record, attribute, value)
