@@ -48,6 +48,8 @@ To Do
 * Add user help to email form
 * Add email tracking functionality
 * Add a selection of products to emails
+* Add an 'assets' upload admin and an easy way to link images or files to an email
+* Maybe add a wysiwyg editor for email composition
 
 
 License
