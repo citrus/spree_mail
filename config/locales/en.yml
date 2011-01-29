@@ -10,10 +10,15 @@ en:
   view_unsubscribed: View Unsubscribed
   view_all_subscribers: View All Subscribers
   
+  resubscribe: Resubscribe
   resubscribe_success: "Successfully Resubscribed"
   resubscribe_failed: "Resubscribe Failed"
   unsubscribe_success: "Successfully Unsubscribed"
+  unsubscribe_success_public: "You were successfully unsubscribed from the mailing list."
   unsubscribe_failed: "Unsubscribed failed"
+  unsubscribe_failed_public: "We're sorry, you could not be unsubscribed at this time."
+  subscribe_thanks: "Thanks for signing up for our newsletter!"
+  subscribe_failed: "Sorry, we could not sign you up."
   
   listing_emails: Listing Emails
   show_email: Show Email
@@ -24,10 +29,32 @@ en:
   
   to: To
   send: Send
+  body: Body
   subject: Subject
   message_body: Message Body
   
   delivery_success: Your email was successfully sent!
   delivery_failed: Sorry, your email could not be sent.
   
+  contact: "Contact"
   
+  received_in_error: 'This is a message from the %{site_name} if you believe you have recieved this in error please let us know.'
+  unsubscribe_text: "If you would like to Unsubscribe"
+  click_here: "Click here"
+  view_in_browser: "to view this email in your browser"
+  visit_online: "visit us online at"
+  message_sent_to_from_on: "This message was sent to %{to} from %{from} on %{on}."
+  
+  
+  unsubscrive_title: "Unsubscribe from our Mailing List"
+  unsubscrive_mail: "Please enter your email address below"
+  unsubscribe: "Unsubscribe"
+  
+  select_subscribers: "Select subscribers"
+  select_all: "Select All"
+  deselect_all: "Deselect All"
+  message_details: "Message Details"
+
+  sign_up_for_our_newsletter: "Sign up for our newsletter"
+
+  newsletter_text_signup: "Lorem Ipsum dolor sit amet"

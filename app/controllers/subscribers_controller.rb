@@ -16,19 +16,19 @@ class SubscribersController < Spree::BaseController
   def create
     @subscriber = Subscriber.new(params[:subscriber])
     if @subscriber.valid? && @subscriber.save
-      flash[:notice] = "Thanks for signing up for our newsletter!"
+      flash[:notice] = I18n.t( :subscribe_thanks)
       redirect_to new_subscriber_path
     else
-      flash[:error] = "Sorry, we could not sign you up."
+      flash[:error] = I18n.t( :subscribe_failed)
       render :action => 'new'
     end
   end
   
   def unsubscribe
     if @subscriber.email == params[:subscriber][:email] && @subscriber.unsubscribe!
-      flash[:notice] = "You were successfully unsubscribed from the mailing list."
+      flash[:notice] = I18n.t(:unsubscribe_success_public)
     else
-      flash[:error]  = "We're sorry, you could not be unsubscribed at this time."
+      flash[:error]  = I18n.t(:unsubscribe_failed_public)
     end
     redirect_to new_subscriber_path
   end

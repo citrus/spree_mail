@@ -2,13 +2,13 @@
 
 <h1><%= t("show_email") %></h1>
 
-<h5>To: (<%= @email.recipients.length %>)</h5>
+<h5><%= t("to") %>: (<%= @email.recipients.length %>)</h5>
 <p><%= @email.recipient_list %></p>
 
-<h5>Subject:</h5>
+<h5><%= t("subject") %>:</h5>
 <p><%= @email.subject %></p>
 
-<h5>Body:</h5>
+<h5><%= t("body") %>:</h5>
 <%= simple_format @email.body %>
 
 <hr/>

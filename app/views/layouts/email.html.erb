@@ -10,6 +10,7 @@
 	
 </head>
 
+<% @base_url = "http://localhost:3000" %>
 
 <body style="min-width: 500px; margin: 0; padding: 15px; background-color: #ddd; background-image: url(<%= @base_url %>/images/mailer/background.jpg); background-repeat: repeat; font-family: Courier, serif; font-size: 14px; line-height: 19px; color: #575757; -webkit-text-size-adjust: 135%;">
 
@@ -23,8 +24,8 @@
           <tr>
             <td><%= link_to image_tag(@base_url + Spree::Config[:logo], :alt => Spree::Config[:site_name], :style => "border: 0"), root_url %></td>
             <td align="right">
-              <p><%= @email.created_at.strftime("%B %d, %Y").downcase.capitalize.gsub(/\s0/, " ") %></p>
-              <p><b>Subject:</b> <%= @email_subject %></p>
+              <p><%= l @email.created_at, :format => "%B %d, %Y" %></p>
+              <p><b><%= t("subject") %>:</b> <%= @email_subject %></p>
             </td>
           </tr>
           <tr>
@@ -36,9 +37,9 @@
         <table cellpadding="15" cellspacing="0" border="0" align="center" width="100%" style="border-top: 1px solid #e0e0e0;">
           <tr>
             <td>
-              <p style="font-size: 12px;">This is a message from the <%= Spree::Config[:site_name] %> if you believe you have recieved this in error please let us know.</p>
-              <p style="font-size: 12px;">Contact: <b><%= mail_to @email.from, @email.from, :style => "color: #5b8fb1;" %></b></p>
-              <p style="font-size: 12px;">If you would like to Unsubscribe <%= link_to "click here", subscriber_url(@subscriber.token), :style => "color: #5b8fb1;" %></p>
+              <p style="font-size: 12px;"><%= t :received_in_error, :site_name => Spree::Config[:site_name] %></p>
+              <p style="font-size: 12px;"><%= t("contact") %>: <b><%= mail_to @email.from, @email.from, :style => "color: #5b8fb1;" %></b></p>
+              <p style="font-size: 12px;"><%= t("unsubscribe_text", :site_name => Spree::Config[:site_name]) %> <%= link_to t("click_here"), subscriber_url(@subscriber.token), :style => "color: #5b8fb1;" %></p>
               <h4 style="padding: 10px 0; margin: 0; border-top: 1px solid #e0e0e0;">
                 <%= link_to Spree::Config[:site_name], root_url, :style => "color: #5b8fb1;" %>
               </h4>  
@@ -60,10 +61,10 @@
       <td align="right">
         <p style="font-size: 12px">
           <% if @link_to_browser %>
-            <%= link_to "click here", @link_to_browser, :style => "color: #5b8fb1;" %>
-            to view this email in your browser
+            <%= link_to t("click_here"), @link_to_browser, :style => "color: #5b8fb1;" %>
+            <%= t("view_in_browser") %>
           <% else %>
-            visit us online at      
+	        <%= t("visit_online") %>      
             <%= link_to Spree::Config[:site_url], root_url, :style => "color: #5b8fb1;" %>
           <% end %>
         </p>
@@ -72,7 +73,10 @@
     <tr>
       <td colspan="2" align="center">
         <br/>
-        <p style="font-size: 11px; color: #999;">This message was sent to <%= mail_to @subscriber.email, @subscriber.email, :style => "color: #5b8fb1;" %> from <%= mail_to @email.from, @email.from, :style => "color: #5b8fb1;" %> on <%= @email.created_at.strftime('%b %d, %Y at %I:%M:%S %p').gsub(/\s0/, ' ') %>.</p>
+        <p style="font-size: 11px; color: #999;"><%= t(:message_sent_to_from_on,
+                                                       :to => @subscriber.email,
+                                                       :from => @email.from,
+                                                       :on => l(@email.created_at, :format => "%b %d, %Y at %I:%M:%S %p")) %>.</p>
       </td>
     </tr>
   </table>

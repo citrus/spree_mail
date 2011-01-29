@@ -44,9 +44,9 @@
   
   <div class="selection left">
 
-    <h3>Select Subscribers:</h3>
-    <%= link_to "select all", "#select-all" %> / 
-    <%= link_to "deselect all", "#deselect-all" %>
+    <h3><%= t("select_subscribers") %>:</h3>
+    <%= link_to t("select_all"), "#select-all" %> / 
+    <%= link_to t("deselect_all"), "#deselect-all" %>
     <ul class="select">
       <% @subscribers.each do |subscriber| %>
         <li class="checkbox">
@@ -60,7 +60,7 @@
   
   <div class="right">
     
-    <h3>Message Details:</h3>
+    <h3><%= t("message_details")%></h3>
     <%= f.field_container :subject do %>
       <%= f.label :subject, t("subject") %><br />
       <%= f.text_field :subject, :class => "title" %>

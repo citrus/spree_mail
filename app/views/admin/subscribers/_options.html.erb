@@ -1,5 +1,5 @@
 <% if subscriber.active? %>
-  <%= link_to "unsubscribe", unsubscribe_admin_subscriber_path(subscriber) %>
+  <%= link_to t("unsubscribe"), unsubscribe_admin_subscriber_path(subscriber) %>
 <% else %>
-  <%= link_to "resubscribe", resubscribe_admin_subscriber_path(subscriber) %>
+  <%= link_to t("resubscribe"), resubscribe_admin_subscriber_path(subscriber) %>
 <% end %>
