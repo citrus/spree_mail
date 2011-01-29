@@ -38,7 +38,7 @@ en:
   
   contact: "Contact"
   
-  received_in_error: 'This is a message from the %{site_name} if you believe you have recieved this in error please let us know.'
+  received_in_error: 'This is a message from the %{site_name} if you believe you have received this in error please let us know.'
   unsubscribe_text: "If you would like to Unsubscribe"
   click_here: "Click here"
   view_in_browser: "to view this email in your browser"
@@ -46,8 +46,8 @@ en:
   message_sent_to_from_on: "This message was sent to %{to} from %{from} on %{on}."
   
   
-  unsubscrive_title: "Unsubscribe from our Mailing List"
-  unsubscrive_mail: "Please enter your email address below"
+  unsubscribe_title: "Unsubscribe from our Mailing List"
+  unsubscribe_mail: "Please enter your email address below"
   unsubscribe: "Unsubscribe"
   
   select_subscribers: "Select subscribers"
@@ -57,4 +57,10 @@ en:
 
   sign_up_for_our_newsletter: "Sign up for our newsletter"
 
-  newsletter_text_signup: "Lorem Ipsum dolor sit amet"
+  newsletter_text_signup: "Lorem Ipsum dolor sit amet..."
+
+
+  activerecord:
+    errors:
+      messages:
+        invalid_email: "appears to be invalid"

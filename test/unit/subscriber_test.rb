@@ -13,6 +13,4 @@ class SubscriberTest < ActiveSupport::TestCase
     assert subscriber.save
   end
 
-  
-
 end
