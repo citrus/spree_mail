@@ -24,7 +24,7 @@ en:
   show_email: Show Email
   new_email: New Email
   editing_email: Editing Email
-  
+  unintened_email_view: This email was not intended for you.
   emails: Emails
   
   to: To
@@ -32,35 +32,32 @@ en:
   body: Body
   subject: Subject
   message_body: Message Body
+  contact: Contact
   
   delivery_success: Your email was successfully sent!
   delivery_failed: Sorry, your email could not be sent.
   
-  contact: "Contact"
-  
-  received_in_error: 'This is a message from the %{site_name} if you believe you have received this in error please let us know.'
-  unsubscribe_text: "If you would like to Unsubscribe"
-  click_here: "Click here"
-  view_in_browser: "to view this email in your browser"
-  visit_online: "visit us online at"
+  unsubscribe_text: If you would like to Unsubscribe
+  click_here: Click here
+  view_in_browser: to view this email in your browser
+  visit_online: visit us online at
+
+  received_in_error: "This is a message from the %{site_name} if you believe you have received this in error please let us know."
   message_sent_to_from_on: "This message was sent to %{to} from %{from} on %{on}."
   
+  unsubscribe_title: Unsubscribe from our Mailing List
+  unsubscribe_mail: Please enter your email address below
+  unsubscribe: Unsubscribe
   
-  unsubscribe_title: "Unsubscribe from our Mailing List"
-  unsubscribe_mail: "Please enter your email address below"
-  unsubscribe: "Unsubscribe"
-  
-  select_subscribers: "Select subscribers"
-  select_all: "Select All"
-  deselect_all: "Deselect All"
-  message_details: "Message Details"
+  select_subscribers: Select subscribers
+  select_all: Select All
+  deselect_all: Deselect All
+  message_details: Message Details
 
-  sign_up_for_our_newsletter: "Sign up for our newsletter"
-
-  newsletter_text_signup: "Lorem Ipsum dolor sit amet..."
-
+  sign_up_for_our_newsletter: Sign up for our newsletter
+  newsletter_text_signup: Lorem Ipsum dolor sit amet...
 
   activerecord:
     errors:
       messages:
-        invalid_email: "appears to be invalid"
+        invalid_email: appears to be invalid

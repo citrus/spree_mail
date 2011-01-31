@@ -1,6 +1,13 @@
+if ENV["RAILS_ENV"] == "test"
+  require 'spree_core'
+  require 'spree_auth'
+  require 'sqlite3'
+end
+
 require 'mail'
 require 'mustache'
 require 'spree_mail/custom_hooks'
+require 'spree_mail/has_token'
 
 module SpreeMail
   

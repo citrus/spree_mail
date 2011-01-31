@@ -1,23 +1,29 @@
+# Configure Rails Envinronment
 ENV["RAILS_ENV"] = "test"
 
-root = ENV["RAILS_ROOT"] || File.expand_path('../../spec/test_app', __FILE__)
-env = File.join(root, 'config', 'environment.rb')
-puts "(Rails Root: #{root})"
-require env
+require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+require "rails/test_help"
+require "shoulda"
 
-begin
-  require 'rubygems'
-  require 'bundler/setup'
-rescue LoadError => e
-	puts "Load error!"
-	puts e.inspect
-	exit
-end
+ActionMailer::Base.delivery_method    = :test
+ActionMailer::Base.perform_deliveries = true
+ActionMailer::Base.default_url_options[:host] = "test.com"
 
-#class ActiveSupport::TestCase
-#  #self.fixture_path = File.expand_path('../fixtures', __FILE__)
-#end
+Rails.backtrace_cleaner.remove_silencers!
+
+# Configure capybara for integration testing
+#require "capybara/rails"
+#Capybara.default_driver   = :rack_test
+#Capybara.default_selector = :css
+
+# Run any available migration
+#ActiveRecord::Migrator.migrate File.expand_path("../dummy/db/migrate/", __FILE__)
+
+# Load support files
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
+
+include HelperMethods
 
 class ActionController::TestCase
-  #include Devise::TestHelpers
+  include Devise::TestHelpers
 end

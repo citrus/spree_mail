@@ -1,10 +1,10 @@
 class Email < ActiveRecord::Base
-  
+
+  include SpreeMail::HasToken
+
   validates :to,      :presence => true
   validates :subject, :presence => true
   validates :body,    :presence => true
-  
-  before_create :set_token
   
   def to=(value)
     value = {} unless value.is_a? Hash
@@ -25,6 +25,10 @@ class Email < ActiveRecord::Base
   def recipient_list
     recipients.join(", ")
   end
+  
+  def render(attribute, subscriber)
+    Mustache.render(self.send(attribute), subscriber.attributes)
+  end
 
   def deliver!
     count = 0
@@ -37,19 +41,6 @@ class Email < ActiveRecord::Base
     end   
     return 0 < count, count
   end
-  
-  
-  
-  def render(attribute, subscriber)
-    Mustache.render(self.send(attribute), subscriber.attributes)
-  end
-  
-  private
- 
-    def set_token
-      write_attribute :token, Digest::SHA1.hexdigest(Time.now.to_s)
-    end
-  
     
   class << self
     

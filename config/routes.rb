@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  get "/email/:token/:id", :to => "emails#show", :as => :read_email
+  get "/email/:subscriber/:email", :to => "emails#show", :as => :read_email
   
   resources :subscribers, :except => [:edit,:update] do
     put :unsubscribe,  :on => :member
