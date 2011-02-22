@@ -1,3 +1,3 @@
 module SpreeMail
-  VERSION = "0.40.0.3"
+  VERSION = "0.40.0.4"
 end

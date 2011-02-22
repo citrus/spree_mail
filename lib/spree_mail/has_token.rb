@@ -5,15 +5,18 @@ module SpreeMail
       model.instance_eval do
         attr_readonly :token
         validates :token, :presence => true
-        before_validation :set_token
+        before_validation :set_token, :on => :create
       end
       model.send(:include, InstanceMethods)
     end
     
     module InstanceMethods
       
-      private
-        
+      def to_param
+        token
+      end
+      
+      private        
         def set_token
           write_attribute :token, Digest::SHA1.hexdigest((Time.now.to_i * rand).to_s)
         end

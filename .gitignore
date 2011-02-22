@@ -3,4 +3,8 @@
 .DS_Store
 Gemfile.lock
 pkg/*
-spec/test_app
+
+# dummy app
+test/dummy/db
+test/dummy/log
+test/dummy/tmp

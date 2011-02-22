@@ -1,6 +1,6 @@
-<h1><%= t("unsubscribe_title") %></h1>
+<h1><%= t('unsubscribe_title') %></h1>
 
-<p><%= t("unsubscribe_mail") %>:</p>
+<p><%= t('unsubscribe_mail') %>:</p>
 
 <% token = Digest::SHA1.hexdigest(Time.now.to_s) %>
 <%= form_for @subscriber, :url => unsubscribe_subscriber_path(@subscriber.token) do |form| %>
@@ -10,7 +10,7 @@
     <%= form.hidden_field :token, :value => token %>
   </p>
   <p>
-    <%= form.submit t("unsubscribe") %> or
-    <%= link_to t("cancel"), root_path %>
+    <%= form.submit t('unsubscribe') %> or
+    <%= link_to t('cancel'), root_path %>
   </p>
 <% end %>

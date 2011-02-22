@@ -5,11 +5,11 @@
     <li>
       <p>
         <% if controller.action_name == 'unsubscribed' %>
-          <%= button_link_to t("view_all_subscribers"), admin_subscribers_path %>
+          <%= button_link_to t('view_all_subscribers'), admin_subscribers_path %>
         <% else %>
-          <%= button_link_to t("view_unsubscribed"), unsubscribed_admin_subscribers_path %>
+          <%= button_link_to t('view_unsubscribed'), unsubscribed_admin_subscribers_path %>
         <% end %>        
-        <%= button_link_to t("new_subscriber"), new_object_url, :icon => 'add' %>
+        <%= button_link_to t('new_subscriber'), new_object_url, :icon => 'add' %>
       </p>
     </li>
   </ul>
@@ -17,15 +17,15 @@
 </div>
 
 
-<h1><%= t("listing_subscribers") %></h1>
+<h1><%= t('listing_subscribers') %></h1>
 
 
 <table class="index">
   <thead>
   <tr>
     <%= hook :admin_subscribers_index_headers do %>
-      <th><%= sort_link @search, :name, t("name") %></th>
-      <th><%= sort_link @search, :email, t("email") %></th>
+      <th><%= sort_link @search, :name, t('name') %></th>
+      <th><%= sort_link @search, :email, t('email') %></th>
       <th><%= hook :admin_subscribers_index_header_actions %></th>
     <% end %>
   </tr>
@@ -54,23 +54,25 @@
 
 
 <% content_for :sidebar do %>
-  <div class="box">
-    <h3><%= t(:search) %></h3>
-    <%= form_for @search do |f| %>
-      <%- locals = {:f => f} %>
-      <%= hook :admin_subscribers_index_search, locals do %>
-        <p>
-          <%= t("name") %><br />
-          <%= f.text_field :name_contains, :size=>18 %>
-        <p>
-          <%= t("email") %><br />
-          <%= f.text_field :email_contains, :size=>18 %>
-        </p>
-        
-      <% end %>
-      <%= hook :admin_subscribers_index_search_buttons, locals do %>
-        <p><%= button t("search") %></p>
-      <% end %>
+<div class="box">
+  <h3><%= t('search') %></h3>
+
+  <% @subscriber = Subscriber.metasearch %>
+  <%= form_for [:admin, @subscriber] do |f| %>
+    <%- locals = {:f => f} %>
+    <%= hook :admin_subscribers_index_search, locals do %>
+      <p>
+        <label><%= t 'name' %></label><br />
+        <%= f.text_field :name_like, :size => 25 %>
+      </p>
+      <p>
+        <label><%= t 'email' %></label><br />
+        <%= f.text_field :email_like, :size => 25 %>
+      </p>
     <% end %>
-  </div>
+    <%= hook :admin_subscribers_index_search_buttons, locals do %>
+      <p><%= button t('search') %></p>
+    <% end %>
+  <% end %>
+</div>
 <% end %>

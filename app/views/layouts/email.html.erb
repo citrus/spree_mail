@@ -23,7 +23,7 @@
             <td><%= link_to image_tag(@base_url + Spree::Config[:logo], :alt => Spree::Config[:site_name], :style => "border: 0"), root_url %></td>
             <td align="right">
               <p><%= l @email.created_at, :format => "%B %d, %Y" %></p>
-              <p><b><%= t("subject") %>:</b> <%= @email_subject %></p>
+              <p><b><%= t('subject') %>:</b> <%= @email_subject %></p>
             </td>
           </tr>
           <tr>
@@ -36,8 +36,8 @@
           <tr>
             <td>
               <p style="font-size: 12px;"><%= t :received_in_error, :site_name => Spree::Config[:site_name] %></p>
-              <p style="font-size: 12px;"><%= t("contact") %>: <b><%= mail_to @email.from, @email.from, :style => "color: #5b8fb1;" %></b></p>
-              <p style="font-size: 12px;"><%= t("unsubscribe_text", :site_name => Spree::Config[:site_name]) %> <%= link_to t("click_here"), subscriber_url(@subscriber.token), :style => "color: #5b8fb1;" %></p>
+              <p style="font-size: 12px;"><%= t('contact') %>: <b><%= mail_to @email.from, @email.from, :style => "color: #5b8fb1;" %></b></p>
+              <p style="font-size: 12px;"><%= t('unsubscribe_text', :site_name => Spree::Config[:site_name]) %> <%= link_to t('click_here'), subscriber_url(@subscriber.token), :style => "color: #5b8fb1;" %></p>
               <h4 style="padding: 10px 0; margin: 0; border-top: 1px solid #e0e0e0;">
                 <%= link_to Spree::Config[:site_name], root_url, :style => "color: #5b8fb1;" %>
               </h4>  
@@ -59,10 +59,10 @@
       <td align="right">
         <p style="font-size: 12px">
           <% if @link_to_browser %>
-            <%= link_to t("click_here"), @link_to_browser, :style => "color: #5b8fb1;" %>
-            <%= t("view_in_browser") %>
+            <%= link_to t('click_here'), @link_to_browser, :style => "color: #5b8fb1;" %>
+            <%= t('view_in_browser') %>
           <% else %>
-	        <%= t("visit_online") %>      
+	        <%= t('visit_online') %>      
             <%= link_to Spree::Config[:site_url], root_url, :style => "color: #5b8fb1;" %>
           <% end %>
         </p>
@@ -71,7 +71,7 @@
     <tr>
       <td colspan="2" align="center">
         <br/>
-        <p style="font-size: 11px; color: #999;"><%= t(:message_sent_to_from_on,
+        <p style="font-size: 11px; color: #999;"><%= t('message_sent_to_from_on',
                                                        :to => @subscriber.email,
                                                        :from => @email.from,
                                                        :on => l(@email.created_at, :format => "%b %d, %Y at %I:%M:%S %p")) %>.</p>

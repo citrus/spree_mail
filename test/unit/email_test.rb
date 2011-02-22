@@ -70,7 +70,7 @@ class EmailTest < Test::Unit::TestCase
       body = @email.render(:body, @subscriber2)
       assert_match "Hello Mailey McSampleton,", body
     end
-  
+    
   end
   
 end

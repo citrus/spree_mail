@@ -24,6 +24,8 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 include HelperMethods
 
-class ActionController::TestCase
-  include Devise::TestHelpers
+if 40 <= Spree.version.split(".")[1].to_i
+  class ActionController::TestCase
+    include Devise::TestHelpers
+  end
 end

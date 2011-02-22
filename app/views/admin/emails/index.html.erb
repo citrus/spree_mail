@@ -3,22 +3,22 @@
 <div class='toolbar'>
   <ul class='actions'>
     <li>
-      <p><%= button_link_to t("new_email"), new_object_url, :icon => 'add' %></p>
+      <p><%= button_link_to t('new_email'), new_object_url, :icon => 'add' %></p>
     </li>
   </ul>
   <br class='clear' />
 </div>
 
 
-<h1><%= t("listing_emails") %></h1>
+<h1><%= t('listing_emails') %></h1>
 
 
 <table class="index">
   <thead>
   <tr>
     <%= hook :admin_emails_index_headers do %>
-      <th><%= sort_link @search, :subject, t("subject") %></th>
-      <th><%= sort_link @search, :body, t("message_body") %></th>
+      <th><%= sort_link @search, :subject, t('subject') %></th>
+      <th><%= sort_link @search, :body, t('message_body') %></th>
       <th><%= hook :admin_emails_index_header_actions %></th>
     <% end %>
   </tr>
@@ -44,21 +44,26 @@
 
 <%= will_paginate(:previous_label => "&#171; #{t('previous')}", :next_label => "#{t('next')} &#187;") %>
 
-
 <% content_for :sidebar do %>
-  <div class="box">
-    <h3><%= t(:search) %></h3>
-    <%= form_for @search, :url => admin_emails_path do |f| %>
-      <%- locals = {:f => f} %>
-      <%= hook :admin_emails_index_search, locals do %>
-        <p>
-          <%= t("to") %><br />
-          <%= f.text_field :to_contains, :size=>18 %>
-        </p>        
-      <% end %>
-      <%= hook :admin_emails_index_search_buttons, locals do %>
-        <p><%= button t("search") %></p>
-      <% end %>
+<div class="box">
+  <h3><%= t('search') %></h3>
+
+  <% @email = Email.metasearch %>
+  <%= form_for [:admin, @email] do |f| %>
+    <%- locals = {:f => f} %>
+    <%= hook :admin_emails_index_search, locals do %>
+      <p>
+        <label><%= t 'to' %></label><br />
+        <%= f.text_field :to_like, :size => 25 %>
+      </p>
+      <p>
+        <label><%= t 'subject' %></label><br />
+        <%= f.text_field :subject_like, :size => 25 %>
+      </p>
     <% end %>
-  </div>
+    <%= hook :admin_emails_index_search_buttons, locals do %>
+      <p><%= button t('search') %></p>
+    <% end %>
+  <% end %>
+</div>
 <% end %>

@@ -41,7 +41,7 @@ class Email < ActiveRecord::Base
     end   
     return 0 < count, count
   end
-    
+      
   class << self
     
     def new(parameters={})

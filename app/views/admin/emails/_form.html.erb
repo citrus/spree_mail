@@ -1,15 +1,10 @@
 <%- locals = {:f => f} %>
 
-<%= @email.errors.include?(:to) %>
-
 <% content_for :head do %>
-  <%= stylesheet_link_tag 'admin/spree_mail' %>  
-  
+  <%= stylesheet_link_tag 'admin/spree_mail' %>
   <script type="text/javascript">
-  //<![CDATA[
-  
+  //<![CDATA[  
     $(document).ready(function() {
-  
       $('div.selection a').click(function(evt) {
         evt.preventDefault();
         var a = $(this);
@@ -24,20 +19,15 @@
             break;
         }
       });
-      
       $('div.selection li').click(function(evt) {
         if (evt.target.type == 'checkbox') return true;
         evt.preventDefault();
         var cb = $(this).find('input[type=checkbox]');
         cb.attr('checked', cb.is(':checked') ? false : true);
       });
-      
     });
-
-    
   //]]>
-  </script>
-  
+  </script>  
 <% end %>
 
 <%= hook :admin_email_form_fields, locals do %>
@@ -46,9 +36,9 @@
   
   <div class="selection left">
 
-    <h3><%= t("select_subscribers") %>:</h3>
-    <%= link_to t("select_all"), "#select-all" %> / 
-    <%= link_to t("deselect_all"), "#deselect-all" %>
+    <h3><%= t('select_subscribers') %>:</h3>
+    <%= link_to t('select_all'), "#select-all" %> / 
+    <%= link_to t('deselect_all'), "#deselect-all" %>
     <ul class="select">
       <% @subscribers.each do |subscriber| %>
         <li class="checkbox">
@@ -62,7 +52,7 @@
   
   <div class="right">
     
-    <h3><%= t("message_details")%></h3>
+    <h3><%= t('message_details')%></h3>
     <%= f.field_container :subject do %>
       <%= f.label :subject, t("subject") %><br />
       <%= f.text_field :subject, :class => "title" %>
@@ -70,7 +60,7 @@
     <% end %>
     
     <%= f.field_container :body do %>
-      <%= f.label :body, t("message_body") %><br />
+      <%= f.label :body, t('message_body') %><br />
       <%= f.text_area :body  %>
       <%= error_message_on :email, :body %>
     <% end %>

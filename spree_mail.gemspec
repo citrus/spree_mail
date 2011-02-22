@@ -19,10 +19,11 @@ Gem::Specification.new do |s|
 
   s.has_rdoc = false
 
-  s.add_dependency('spree_core', '>= 0.30.1')
-  s.add_dependency('spree_auth', '>= 0.30.1')
-  s.add_dependency('mustache',   '>= 0.12.0')
-  s.add_dependency('mail',       '>= 2.2.0')
+  s.add_dependency('spree_core',  '>= 0.30.1')
+  s.add_dependency('spree_auth',  '>= 0.30.1')
+  s.add_dependency('mustache',    '>= 0.12.0')
+  s.add_dependency('mail',        '>= 2.2.0')
+  s.add_dependency('meta_search', '>= 1.0.1')
   
 	s.add_development_dependency('shoulda', '>= 2.11.3')
   s.add_development_dependency('sqlite3-ruby')
