@@ -14,7 +14,7 @@ To create a spree mail demo app, run the following:
     rails new spree_mail_example 
     cd spree_mail_example 
     echo "gem 'spree', '0.40.2'" >> Gemfile 
-    echo "gem 'spree_mail', '0.40.0.3'" >> Gemfile 
+    echo "gem 'spree_mail', '0.40.0.4'" >> Gemfile 
     rm public/index.html 
     bundle install 
     rake spree:install spree_mail:install db:migrate db:seed
@@ -22,9 +22,9 @@ To create a spree mail demo app, run the following:
 
 Or all at once:
 
-    rails new spree_mail_example; cd spree_mail_example; echo "gem 'spree', '0.40.2'" >> Gemfile; echo "gem 'spree_mail', '0.40.0.3'" >> Gemfile; rm public/index.html; bundle install; rake spree:install spree_mail:install db:migrate db:seed
+    rails new spree_mail_example; cd spree_mail_example; echo "gem 'spree', '0.40.2'" >> Gemfile; echo "gem 'spree_mail', '0.40.0.4'" >> Gemfile; rm public/index.html; bundle install; rake spree:install spree_mail:install db:migrate db:seed
 
-`rake db:sample` if you want to...
+`rake spree_sample:install db:sample` if you want to...
 
 Then start the server with `rails s`
 
@@ -42,7 +42,7 @@ Before sending, you may need to create an action_mailer initializer.
 To Do
 -----
 
-* Write real tests 
+* Write more tests 
 * Write a rake task that converts current users to subscribers
 * Add checkbox on user signup: 'sign up for our mailing list'
 * Add user help to email form
