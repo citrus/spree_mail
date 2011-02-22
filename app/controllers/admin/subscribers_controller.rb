@@ -40,12 +40,12 @@ class Admin::SubscribersController < Admin::BaseController
   end
 
   def unsubscribed
-    @search = Subscriber.searchlogic(params[:search])
+    @search = Subscriber.where("unsubscribed_at IS NOT NULL").search(params[:search])
     
     #set order by to default or form result
     @search.order ||= "ascend_by_name"
 
-    @subscribers = @collection = @search.do_search.unsubscribed.paginate(:per_page => Spree::Config[:admin_products_per_page], :page => params[:page])
+    @subscribers = @collection = @search.paginate(:per_page => Spree::Config[:admin_products_per_page], :page => params[:page])
     render :template => 'admin/subscribers/index'
   end
 
@@ -67,12 +67,12 @@ class Admin::SubscribersController < Admin::BaseController
 
   def collection
     return @collection if @collection.present?
-    @search = Subscriber.searchlogic(params[:search])
+    @search = Subscriber.where("unsubscribed_at IS NULL").search(params[:search])
     
     #set order by to default or form result
     @search.order ||= "ascend_by_name"
 
-    @collection = @search.do_search.active.paginate(:per_page => Spree::Config[:admin_products_per_page], :page => params[:page])
+    @collection = @search.paginate(:per_page => Spree::Config[:admin_products_per_page], :page => params[:page])
     
   end  
 end

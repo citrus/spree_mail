@@ -1,7 +1,9 @@
 class Subscriber < ActiveRecord::Base
 
   include SpreeMail::HasToken
-
+  
+  # ?? Do we need these scopes anywhere else 
+  # -> DRY (Later task)
   scope :active, where("unsubscribed_at IS NULL").order(:name)
   scope :unsubscribed, where("unsubscribed_at IS NOT NULL").order(:name)
   

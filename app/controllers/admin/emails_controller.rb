@@ -47,12 +47,12 @@ class Admin::EmailsController < Admin::BaseController
   def collection
     return @collection if @collection.present?
     unless request.xhr?
-      @search = Email.searchlogic(params[:search])
+      @search = Email.search(params[:search])
 
       #set order by to default or form result
       @search.order ||= "ascend_by_name"
 
-      @collection = @search.do_search.paginate(:per_page => Spree::Config[:admin_products_per_page], :page => params[:page])
+      @collection = @search.paginate(:per_page => Spree::Config[:admin_products_per_page], :page => params[:page])
 
     else
       @collection = Email.where("wholesalers.name like :search", {:search => "#{params[:q].strip}%"}).limit(params[:limit] || 100)

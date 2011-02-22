@@ -17,8 +17,8 @@
   <thead>
   <tr>
     <%= hook :admin_emails_index_headers do %>
-      <th><%= order @search, :by => :subject, :as => t("subject") %></th>
-      <th><%= order @search, :by => :body, :as => t("message_body") %></th>
+      <th><%= sort_link @search, :subject, t("subject") %></th>
+      <th><%= sort_link @search, :body, t("message_body") %></th>
       <th><%= hook :admin_emails_index_header_actions %></th>
     <% end %>
   </tr>
@@ -48,7 +48,7 @@
 <% content_for :sidebar do %>
   <div class="box">
     <h3><%= t(:search) %></h3>
-    <%= form_for @search do |f| %>
+    <%= form_for @search, :url => admin_emails_path do |f| %>
       <%- locals = {:f => f} %>
       <%= hook :admin_emails_index_search, locals do %>
         <p>

@@ -24,8 +24,8 @@
   <thead>
   <tr>
     <%= hook :admin_subscribers_index_headers do %>
-      <th><%= order @search, :by => :name, :as => t("name") %></th>
-      <th><%= order @search, :by => :email, :as => t("email") %></th>
+      <th><%= sort_link @search, :name, t("name") %></th>
+      <th><%= sort_link @search, :email, t("email") %></th>
       <th><%= hook :admin_subscribers_index_header_actions %></th>
     <% end %>
   </tr>
