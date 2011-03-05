@@ -39,13 +39,23 @@ Before sending, you may need to create an action_mailer initializer.
     ActionMailer::Base.sendmail_settings = {
       :arguments => '-r no-reply@spree-mail-example.com'
     }
+    
+    
+Testing
+-------
+
+Shoulda and Capybara/Selenium tests can be run by cloning the repo and running `rake`:
+
+    git clone git://github.com/citrus/spree_mail.git
+    cd spree_mail
+    bundle install
+    rake
 
 
 To Do
 -----
 
 * Write admin tests 
-* <s>Write a rake task that converts current users to subscribers</s> `rake spree_mail:subscribe_users`
 * Add checkbox on user signup: 'sign up for our mailing list'
 * Add user help to admin email form
 * Add email tracking functionality
