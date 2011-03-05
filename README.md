@@ -45,7 +45,7 @@ To Do
 -----
 
 * Write admin tests 
-* <strike>Write a rake task that converts current users to subscribers</strike> `rake spree_mail:subscribe_users`
+* <s>Write a rake task that converts current users to subscribers</s> `rake spree_mail:subscribe_users`
 * Add checkbox on user signup: 'sign up for our mailing list'
 * Add user help to admin email form
 * Add email tracking functionality
