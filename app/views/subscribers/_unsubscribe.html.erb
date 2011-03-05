@@ -2,7 +2,7 @@
 
 <p><%= t('unsubscribe_mail') %>:</p>
 
-<%= form_for @subscriber, :url => unsubscribe_subscriber_path(@subscriber.token) do |form| %>
+<%= form_for @subscriber, :url => unsubscribe_subscriber_path(@subscriber) do |form| %>
   <p>
     <%= form.label :email %>
     <%= form.text_field :email, :value => "" %>

@@ -1,5 +1,17 @@
 namespace :spree_mail do
 
+  desc "Converts all current users into subscribers if they're not already"
+  task :subscribe_users do
+    
+    require File.join(Rails.root, "config/environment")
+    
+    puts User.all
+    
+    
+    
+  end
+  
+  
   desc "Copies all migrations (NOTE: This will be obsolete with Rails 3.1)"
   task :install do
     Rake::Task['spree_mail:install:migrations'].invoke

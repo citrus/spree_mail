@@ -1,7 +1,8 @@
 <div class="left">
   
   <%= hook :subscriber_static_content do %>
-    <%= render 'hooks/subscriber_static_content' %>
+    <h1><%= t('newsletter_sign_up') %></h1>
+    <p><%= t('newsletter_text_signup') %></p>
   <% end %>
   
 </div>
@@ -9,7 +10,10 @@
 <div class="right">
   
   <%= hook :subscriber_sign_up_form do %>
-    <%= render 'hooks/subscriber_sign_up_form' %>
+    <%= render "shared/error_messages", :target => @subscriber %>
+    <%= form_for @subscriber do |form| %>
+      <%= render 'subscribers/fields', :form => form %>
+    <% end %>
   <% end %>
   
 </div>

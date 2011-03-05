@@ -2,21 +2,18 @@ class SubscribersController < Spree::BaseController
 
   before_filter :get_subscriber, :only => [:show, :unsubscribe]
   
-  def index
-    redirect_to new_subscriber_path
-  end
-  
   def new
     @subscriber = Subscriber.new
   end
   
   def show
+    return redirect_to(new_subscriber_path) unless @subscriber && @subscriber.active?
   end
   
   def create
     @subscriber = Subscriber.new(params[:subscriber])
     if @subscriber.valid? && @subscriber.save
-      flash[:notice] = t('subscribe_thanks')
+      flash[:notice] = t('subscribe_success')
       redirect_to new_subscriber_path
     else
       flash[:error] = t('subscribe_failed')
@@ -33,7 +30,7 @@ class SubscribersController < Spree::BaseController
       redirect_to subscriber_path(@subscriber)
     end
   end
-  
+    
   private
   
     def get_subscriber

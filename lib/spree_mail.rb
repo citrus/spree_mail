@@ -1,8 +1,5 @@
-if ENV["RAILS_ENV"] == "test"
-  require 'spree_core'
-  require 'spree_auth'
-  require 'sqlite3'
-end
+require 'spree_core'
+require 'spree_auth' 
 
 require 'mail'
 require 'mustache'

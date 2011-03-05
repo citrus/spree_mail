@@ -17,7 +17,7 @@ en:
   unsubscribe_success_public: "You were successfully unsubscribed from the mailing list."
   unsubscribe_failed: "Unsubscribed failed"
   unsubscribe_failed_public: "We're sorry, you could not be unsubscribed at this time."
-  subscribe_thanks: "Thanks for signing up for our newsletter!"
+  subscribe_success: "Thanks for signing up for our newsletter!"
   subscribe_failed: "Sorry, we could not sign you up."
   
   listing_emails: Listing Emails

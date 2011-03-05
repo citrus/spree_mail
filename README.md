@@ -42,7 +42,7 @@ Before sending, you may need to create an action_mailer initializer.
 To Do
 -----
 
-* Write more tests 
+* Write admin tests 
 * Write a rake task that converts current users to subscribers
 * Add checkbox on user signup: 'sign up for our mailing list'
 * Add user help to email form
