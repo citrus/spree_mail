@@ -44,8 +44,9 @@ Before sending, you may need to create an action_mailer initializer.
 To Do
 -----
 
+<s>Write a rake task that converts current users to subscribers</s> `rake spree_mail:subscribe_users`
+
 * Write admin tests 
-* <s>Write a rake task that converts current users to subscribers</s> `rake spree_mail:subscribe_users`
 * Add checkbox on user signup: 'sign up for our mailing list'
 * Add user help to admin email form
 * Add email tracking functionality
