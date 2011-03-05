@@ -5,6 +5,8 @@ Spree Mail is a complete email marketing extension for Spree. Visitors can sign 
 
 To customize Spree Mail's html template, copy `email.html.erb` to your local layouts folder.
 
+Convert all of your site's current users into subscribers by running `rake spree_mail:subscribe_users` from your project's root. Be nice and don't spam your customers :)
+
 
 Demo
 ----
@@ -43,9 +45,9 @@ To Do
 -----
 
 * Write admin tests 
-* Write a rake task that converts current users to subscribers
+* <strike>Write a rake task that converts current users to subscribers</strike> `rake spree_mail:subscribe_users`
 * Add checkbox on user signup: 'sign up for our mailing list'
-* Add user help to email form
+* Add user help to admin email form
 * Add email tracking functionality
 * Add a selection of products to emails
 * Add an 'assets' upload admin and an easy way to link images or files to an email

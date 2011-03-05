@@ -2,15 +2,11 @@ namespace :spree_mail do
 
   desc "Converts all current users into subscribers if they're not already"
   task :subscribe_users do
-    
     require File.join(Rails.root, "config/environment")
-    
-    puts User.all
-    
-    
-    
+    require 'spree_mail/user_extension'
+    count = User.to_subscribers!
+    puts 0 < count ? "#{count} users are now subscribers." : "No new subscribers were created."
   end
-  
   
   desc "Copies all migrations (NOTE: This will be obsolete with Rails 3.1)"
   task :install do
