@@ -2,9 +2,60 @@ class Email < ActiveRecord::Base
 
   include SpreeMail::HasToken
 
-  validates :to,      :presence => true
+  validates :to,      :presence => true, :if => Proc.new{|email| email.state == "address" }
   validates :subject, :presence => true
   validates :body,    :presence => true
+  
+  attr_reader :sent_at
+    
+  state_machine :state, :initial => :layout do
+          
+    event :next do
+      transition :from => :layout,  :to => :address
+      transition :from => :address, :to => :edit
+      transition :from => :edit,    :to => :preview
+      transition :from => :preview, :to => :sent
+    end                   
+    
+    event :previous do
+      transition :from => :preview, :to => :edit
+      transition :from => :edit,    :to => :address
+      transition :from => :address, :to => :layout
+    end    
+    
+    event :change_layout do
+      transition :to => :layout, :if => :allow_alteration?
+    end
+    
+    event :readdress do
+      transition :to => :address, :if => :allow_alteration?
+    end
+    
+    event :preview do
+      transition :from => :edit, :to => :preview
+    end
+    
+    event :revise do
+      transition :from => :preview, :to => :edit
+    end
+    
+    after_transition :to => :sent, :do => :deliver!
+
+  end
+  
+  
+  
+  def allow_alteration?
+    !sent?
+  end
+    
+  def sent?
+    !@sent_at.nil?
+  end
+  
+  
+  
+  
   
   def to=(value)
     value = {} unless value.is_a? Hash
@@ -31,6 +82,7 @@ class Email < ActiveRecord::Base
   end
 
   def deliver!
+    @sent_at = Time.now
     count = 0
     recipients.each do |email|
       subscriber = Subscriber.find_by_email(email) rescue nil
@@ -41,6 +93,14 @@ class Email < ActiveRecord::Base
     end   
     return 0 < count, count
   end
+  
+  
+  #private
+  
+    #def initialize(params)
+    #  @state = "layout"
+    #  super(params)
+    #end
       
   class << self
     

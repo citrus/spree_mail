@@ -8,6 +8,15 @@ To customize Spree Mail's html template, copy `email.html.erb` to your local lay
 Convert all of your site's current users into subscribers by running `rake spree_mail:subscribe_users` from your project's root. Be nice and don't spam your customers :)
 
 
+
+### Upgrading from 0.40.0.4 to 0.40.1
+
+Spree Mail version 0.40.1 adds a finite state machine to the email class which requires the email table to have a 'state' field.
+
+Copy the migration to your project by running `rake spree_mail:install:migrations` then run `rake db:migrate`.
+
+
+
 Demo
 ----
 
@@ -49,8 +58,8 @@ Shoulda and Capybara/Selenium tests can be run by cloning the repo and running `
     git clone git://github.com/citrus/spree_mail.git
     cd spree_mail
     bundle install
+    rake db:test_prep
     rake
-
 
 To Do
 -----

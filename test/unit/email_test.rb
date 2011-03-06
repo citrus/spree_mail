@@ -9,11 +9,9 @@ class EmailTest < Test::Unit::TestCase
     setup_subscribers
   end
 
-  should validate_presence_of(:to)
-  should validate_presence_of(:subject)
-  should validate_presence_of(:body)
   
   should have_readonly_attribute(:token)
+  
   
   context "a new email" do
   
@@ -21,15 +19,20 @@ class EmailTest < Test::Unit::TestCase
       @email = Email.new
     end
     
+    #should_not validate_presence_of(:to)  
+    #should_not validate_presence_of(:subject)
+    #should_not validate_presence_of(:body)
+  
+    
     should "have default text" do
       assert !@email.body.blank?
     end
     
-    should "require at least one email in to hash" do
-      @email.to = { "0" => "" }
-      assert !@email.valid?
-      assert @email.errors.include?(:to)
-    end 
+    #should "require at least one email in to hash" do
+    #  @email.to = { "0" => "" }
+    #  assert !@email.valid?
+    #  assert @email.errors.include?(:to)
+    #end 
     
     should "validate to hash" do
       @email.to = @to_hash
@@ -47,28 +50,73 @@ class EmailTest < Test::Unit::TestCase
   
   end
   
+  
+  
+  
   context "an existing email" do
     
+    
+    
+    
     setup do
-      @email = Email.create(:to => @to_hash, :subject => "Hi {{name}}")
+      @email = Email.create(:subject => "Hi {{name}}", :body => "Hello {{name}}")
+    end
+      
+      
+      
+      
+    context "in address state" do
+            
+      setup do
+        @email = Email.create(:to => @to_hash)
+      end
+      
+      subject do
+        Email.new(:to => @to_hash)
+      end
+      
+      should "have recipients" do
+        @email.to = @to_hash
+        assert_equal 2, @email.recipients.length
+      end
+      
+      should "make recipient list" do
+        assert_equal "#{@subscriber1.email}, #{@subscriber2.email}", @email.recipient_list
+      end
+    
     end
     
-    should "have recipients" do
-      assert_equal 2, @email.recipients.length
+    
+    
+    context "in edit state" do
+      
+      setup do
+        @email = Email.create(:to => @to_hash, :subject => "Hi {{name}}", :body => "Hello {{name}}")
+      end
+    
+      subject do
+        Email.new(:to => @to_hash, :subject => "Hi {{name}}", :body => "Hello {{name}}")
+      end
+      
+      should validate_presence_of(:subject)
+      should validate_presence_of(:body)
+      
     end
     
-    should "make recipient list" do
-      assert_equal "#{@subscriber1.email}, #{@subscriber2.email}", @email.recipient_list
-    end
   
-    should "render subject with mustache" do
-      subject = @email.render(:subject, @subscriber1)
-      assert_equal "Hi Mister Testerman", subject 
-    end
-    
-    should "render body with mustache" do
-      body = @email.render(:body, @subscriber2)
-      assert_match "Hello Mailey McSampleton,", body
+  
+    context "in preview state" do
+  
+      should "render subject with mustache" do
+        subject = @email.render(:subject, @subscriber1)
+        assert_equal "Hi Mister Testerman", subject 
+      end
+      
+      should "render body with mustache" do
+        body = @email.render(:body, @subscriber2)
+        assert_match "Hello Mailey McSampleton,", body
+      end
+  
     end
     
   end
