@@ -1,0 +1,13 @@
+<%= render 'admin/shared/spree_mail_sub_nav' %>
+
+<h1><%= t('show_email_layout') %></h1>
+
+<h5><%= t('name') %>:</h5>
+<p><%= @email_layout.name %></p>
+
+<hr/>
+
+<p>
+  <%= link_to_edit @email_layout %> <%= t('or') %>
+  <%= link_to t('back'), collection_url %>
+</p>

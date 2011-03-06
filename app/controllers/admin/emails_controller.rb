@@ -3,7 +3,13 @@ class Admin::EmailsController < Admin::BaseController
   resource_controller
   
   before_filter :get_subscribers, :only => [:new, :create, :edit, :update]
+  before_filter :get_layouts, :only => [:new, :create, :edit, :update]
   
+  create.success.wants.html {
+    cookies[:current_email] = @email.token
+    redirect_to admin_email_state_path("address") 
+  }
+
   destroy.success.wants.js { render_js_for_destroy }
 
   def deliver
@@ -23,8 +29,12 @@ class Admin::EmailsController < Admin::BaseController
      @subscribers = Subscriber.active
     end
     
+    def get_layouts  
+      @layouts = EmailLayout.all
+    end
+    
     def object
-      @object ||= Email.find_by_token(params[:id])
+      @object ||= Email.find_by_token(params[:id] || cookies[:current_email])
     end
     
     def collection

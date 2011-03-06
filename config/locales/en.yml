@@ -2,6 +2,14 @@ en:
   spree_mail: Spree Mail
   newsletter_sign_up: Sign up for our Newsletter
   
+  email:
+    layout: layout
+    address: address
+    edit: compose
+    preview: preview
+    sent: confirmation
+    
+  
   subscribers: Subscribers
   listing_subscribers: Listing Subscribers
   show_subscriber: Show Subscriber
@@ -20,12 +28,18 @@ en:
   subscribe_success: "Thanks for signing up for our newsletter!"
   subscribe_failed: "Sorry, we could not sign you up."
   
+  emails: Emails
   listing_emails: Listing Emails
   show_email: Show Email
   new_email: New Email
   editing_email: Editing Email
-  unintened_email_view: This email was not intended for you.
-  emails: Emails
+  unintended_email_view: This email was not intended for you.
+  
+  email_layouts: Email Layouts
+  listing_email_layouts: Listing Email Layouts
+  show_email_layout: Show Email Layout
+  new_email_layout: New Email Layout
+  editing_email_layout: Editing Email Layout
   
   to: To
   send: Send

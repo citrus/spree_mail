@@ -20,14 +20,14 @@ class TestEmailState < Test::Unit::TestCase
   end
   
   should "advance to :address" do
-    @email.next!
+    @email.next
     assert_equal "address", @email.state
   end
   
   context "an existing, un-sent email" do
       
     setup do
-      2.times{ @email.next! }
+      2.times{ @email.next }
     end  
   
     should "advance to :edit" do
@@ -35,22 +35,22 @@ class TestEmailState < Test::Unit::TestCase
     end
   
     should "return to :address" do
-      @email.readdress!
+      @email.readdress
       assert_equal "address", @email.state
     end
     
     should "return to :address" do
-      @email.previous!
+      @email.previous
       assert_equal "address", @email.state
     end
     
     should "return to :layout" do
-      2.times{ @email.previous! }
+      2.times{ @email.previous }
       assert_equal "layout", @email.state
     end
     
     should "advance to :preview" do
-      @email.next!
+      @email.next
       assert_equal "preview", @email.state
     end
     
@@ -59,7 +59,7 @@ class TestEmailState < Test::Unit::TestCase
   context "a sent email" do
     
     setup do
-      4.times{ @email.next! }
+      4.times{ @email.next }
     end
     
     should "not be editable" do

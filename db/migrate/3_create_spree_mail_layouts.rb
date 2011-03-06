@@ -1,7 +1,7 @@
 class CreateSpreeMailLayouts < ActiveRecord::Migration
   
   def self.up    
-    create_table :email_layout do |t|
+    create_table :email_layouts do |t|
       t.string     :name
       t.text       :head
       t.text       :header
@@ -11,10 +11,12 @@ class CreateSpreeMailLayouts < ActiveRecord::Migration
       t.text       :footer      
       t.timestamps
     end
+    add_column :emails, :layout, :string
   end
 
   def self.down
     drop_table :email_layouts
+    remove_column :emails, :layout
   end
 
 end

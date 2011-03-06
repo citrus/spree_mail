@@ -13,16 +13,16 @@ class Email
   state_machine :state, :initial => :layout do
           
     event :next do
-      transition :from => :layout,  :to => :address
-      transition :from => :address, :to => :edit
-      transition :from => :edit,    :to => :preview
-      transition :from => :preview, :to => :sent
+      transition :layout  => :address
+      transition :address => :edit
+      transition :edit    => :preview
+      transition :preview => :sent
     end                   
     
     event :previous do
-      transition :from => :preview, :to => :edit
-      transition :from => :edit,    :to => :address
-      transition :from => :address, :to => :layout
+      transition :preview => :edit
+      transition :edit    => :address
+      transition :address => :layout
     end    
     
     event :change_layout do

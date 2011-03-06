@@ -13,9 +13,14 @@ Rails.application.routes.draw do
       get :resubscribe,  :on => :member
       get :unsubscribe,  :on => :member
     end
+    
+    get '/email/:state', :to => 'emails#edit', :state => /layout|address|edit|preview/, :as => :email_state
     resources :emails do
       get :deliver, :on => :member, :path => 'send'
     end
+    
+
+    resources :email_layouts
   end
 
 end

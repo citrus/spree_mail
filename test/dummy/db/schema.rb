@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110306030915) do
+ActiveRecord::Schema.define(:version => 20110306084425) do
 
   create_table "addresses", :force => true do |t|
     t.string   "firstname"
@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(:version => 20110306030915) do
     t.string   "gateway_payment_profile_id"
   end
 
-  create_table "email_layout", :force => true do |t|
+  create_table "email_layouts", :force => true do |t|
     t.string   "name"
     t.text     "head"
     t.text     "header"
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20110306030915) do
     t.datetime "updated_at"
     t.string   "state",      :default => "layout"
     t.datetime "sent_at"
+    t.string   "layout"
   end
 
   create_table "gateways", :force => true do |t|

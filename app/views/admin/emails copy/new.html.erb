@@ -1,14 +1,13 @@
 <%= render 'admin/shared/spree_mail_sub_nav' %>
 
 <%= hook :admin_email_new_form_header do %>
-  <h1><%= t("#{@email.state}_email") %></h1>
-  <%= progress_steps %>
-  <br/>
+  <h1><%= t('new_email') %></h1>
 <% end %>
 
 <%= hook :admin_email_new_form do %>
   <%= form_for(:email, :url => collection_url) do |f| %>
     <%= render :partial => "form", :locals => { :f => f } %>
+
     <%= hook :admin_email_new_form_buttons do %>
       <%= render :partial => "admin/shared/new_resource_links" %>
     <% end %>

@@ -2,41 +2,46 @@ class Email < ActiveRecord::Base
 
   include SpreeMail::HasToken
 
-  validates :to,      :presence => true, :if => Proc.new{|email| email.state == "address" }
-  validates :subject, :presence => true
-  validates :body,    :presence => true
+  validates :to,      :presence => true, :if => :state_is_address?
+  validates :subject, :presence => true, :if => :state_is_edit?
+  validates :body,    :presence => true, :if => :state_is_edit?
   
-  attr_reader :sent_at
-    
+  
+  # Method missing for validation conditionals
+  def method_missing(method, *args, &block)
+    if matches = method.to_s.match(/state_is_([a-z]+)\?$/)
+      state.to_s == matches[1].to_s
+    else
+      super
+    end
+  end
+  
+      
+  
   state_machine :state, :initial => :layout do
-          
+       
     event :next do
-      transition :from => :layout,  :to => :address
-      transition :from => :address, :to => :edit
-      transition :from => :edit,    :to => :preview
-      transition :from => :preview, :to => :sent
+      transition :layout => :address, :address => :edit, :edit => :preview, :preview => :sent
     end                   
     
     event :previous do
-      transition :from => :preview, :to => :edit
-      transition :from => :edit,    :to => :address
-      transition :from => :address, :to => :layout
+      transition :preview => :edit, :edit => :address, :address => :layout, :unless => :sent?
     end    
     
     event :change_layout do
-      transition :to => :layout, :if => :allow_alteration?
+      transition :to => :layout, :unless => :sent?
     end
     
     event :readdress do
-      transition :to => :address, :if => :allow_alteration?
+      transition :from => [:edit, :preview], :to => :address, :unless => :sent?
     end
     
     event :preview do
-      transition :from => :edit, :to => :preview
+      transition :edit => :preview
     end
     
     event :revise do
-      transition :from => :preview, :to => :edit
+      transition :preview => :edit
     end
     
     after_transition :to => :sent, :do => :deliver!
@@ -45,18 +50,7 @@ class Email < ActiveRecord::Base
   
   
   
-  def allow_alteration?
-    !sent?
-  end
-    
-  def sent?
-    !@sent_at.nil?
-  end
-  
-  
-  
-  
-  
+  # An attribute writer that ensures a non-empty hash  
   def to=(value)
     value = {} unless value.is_a? Hash
     value.delete("0")
@@ -64,25 +58,31 @@ class Email < ActiveRecord::Base
     write_attribute :to, value.inspect
   end
   
+  # A shortcut used in the EmailMailer
   def from
     MailMethod.current.preferred_mails_from rescue "no-reply@spree-mail-example.com"
   end
   
+  # A hash of ids and emails
   def recipients
     hash = eval(read_attribute(:to)) rescue {}  
     hash.values  
   end
   
+  # A comma seperated list of email addresses
   def recipient_list
     recipients.join(", ")
   end
   
+  # Renders an attribute against a subscriber.
+  # Used for :subject and :body 
   def render(attribute, subscriber)
     Mustache.render(self.send(attribute), subscriber.attributes)
   end
 
+  # Updates sent at to now and shoots an email to each recipient
   def deliver!
-    @sent_at = Time.now
+    update_attributes(:sent_at => Time.now)
     count = 0
     recipients.each do |email|
       subscriber = Subscriber.find_by_email(email) rescue nil
@@ -90,20 +90,19 @@ class Email < ActiveRecord::Base
         mail = EmailMailer.with_layout(self, subscriber)
         count += 1 if mail && mail.deliver!
       end
-    end   
-    return 0 < count, count
+    end
+    0 < count
   end
   
+  # Returns true unless sent at is nil
+  def sent?
+    !self.sent_at.nil?
+  end
   
-  #private
-  
-    #def initialize(params)
-    #  @state = "layout"
-    #  super(params)
-    #end
       
   class << self
     
+    # Builds a new email with defaults
     def new(parameters={})
       parameters ||= {}
       super(parameters.reverse_merge!(:body => template))

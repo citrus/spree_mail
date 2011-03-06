@@ -4,6 +4,8 @@ require 'spree_auth'
 require 'mail'
 require 'mustache'
 require 'meta_search'
+require 'state_machine'
+
 require 'spree_mail/custom_hooks'
 require 'spree_mail/has_token'
 

@@ -12,7 +12,7 @@ class EmailsController < Spree::BaseController
       @base_url      = "http://#{Spree::Config[:site_url]}"
       render :layout => 'email', :text => simple_format(@text)    
     else
-      flash[:error] = t('unintened_email_view')
+      flash[:error] = t('unintended_email_view')
       redirect_to new_subscriber_path
     end
   end

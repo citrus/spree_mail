@@ -1,0 +1,44 @@
+<%- locals = {:f => f} %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'admin/spree_mail' %>
+  <script type="text/javascript">
+  //<![CDATA[  
+    $(document).ready(function() {
+      $('div.selection a').click(function(evt) {
+        evt.preventDefault();
+        var a = $(this);
+        var href = a.attr('href');
+        var checkboxes = a.siblings('ul.select').find('input.checkbox');
+        switch(href) {
+          case '#select-all':        
+            checkboxes.attr('checked', true);
+            break;
+          case '#deselect-all':
+            checkboxes.attr('checked', false);        
+            break;
+        }
+      });
+      $('div.selection li').click(function(evt) {
+        if (evt.target.type == 'checkbox') return true;
+        evt.preventDefault();
+        var cb = $(this).find('input[type=checkbox]');
+        cb.attr('checked', cb.is(':checked') ? false : true);
+      });
+    });
+  //]]>
+  </script>  
+<% end %>
+
+<%= hook :admin_email_layout_form_fields, locals do %>
+  
+  <%= render "shared/error_messages", :target => @email_layout %>
+      
+  <%= f.field_container :name do %>
+    <%= f.label :name, t("name") %><br />
+    <%= f.text_field :name, :class => "title" %>
+    <%= error_message_on :email_layout, :name %>
+  <% end %>
+  
+  
+<% end %>

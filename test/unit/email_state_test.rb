@@ -2,35 +2,24 @@ require 'test_helper'
 
 class EmailStateTest < Test::Unit::TestCase
 
-  
   def setup
-    @email = Email.new(:subject => "testing 123", :body => "Hello {{name}}")
-    
-    #puts @email.state
-    #
-    #
-    #puts @email.inspect
-    #
-    #puts @email.next!
-    #
-    #puts @email.state
-    #
-    
+    setup_subscribers
+    @email = Email.create(:to => @to_hash, :subject => "testing 123", :body => "Hello {{name}}")
   end
   
-  should "advance to :layout" do
+  should "start with :layout" do
     assert_equal "layout", @email.state
   end
   
   should "advance to :address" do
-    @email.next!
+    @email.next
     assert_equal "address", @email.state
   end
   
   context "an existing, un-sent email" do
       
     setup do
-      2.times{ @email.next! }
+      2.times{ @email.next }
     end  
   
     should "advance to :edit" do
@@ -38,22 +27,22 @@ class EmailStateTest < Test::Unit::TestCase
     end
   
     should "return to :address" do
-      @email.readdress!
+      @email.readdress
       assert_equal "address", @email.state
     end
     
     should "return to :address" do
-      @email.previous!
+      @email.previous
       assert_equal "address", @email.state
     end
     
     should "return to :layout" do
-      2.times{ @email.previous! }
+      2.times{ @email.previous }
       assert_equal "layout", @email.state
     end
     
     should "advance to :preview" do
-      @email.next!
+      @email.next
       assert_equal "preview", @email.state
     end
     
@@ -62,10 +51,7 @@ class EmailStateTest < Test::Unit::TestCase
   context "a sent email" do
     
     setup do
-      4.times{ 
-        @email.next! 
-        puts @email.state
-      }
+      4.times{ @email.next }
     end
     
     should "not be editable" do

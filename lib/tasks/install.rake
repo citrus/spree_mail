@@ -26,12 +26,13 @@ namespace :spree_mail do
       
       files = Dir.entries(source).select{|file| file.match('.rb') }
       files.each_with_index do |file,index|
+        filename = file.sub(/^[0-9]*_?/, '')
         time = Time.now + (index * 7)
         number = [time.utc.strftime("%Y%m%d%H%M%S"), "%.14d" % index].max
-        new_file = [number,file.sub(/^[0-9]*_?/, '')].join('_')
+        new_file = [number, filename].join('_')
         src = File.join(source, file)
         dst = File.join(destination, new_file)
-        if 0 < migrations.select{|migration| migration.match(file) != nil }.length
+        if 0 < migrations.select{|migration| migration.match(filename) != nil }.length
           puts "#{file} exists!"
         else
           FileUtils.cp(src, dst)
