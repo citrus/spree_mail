@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     end
     
 
-    resources :email_layouts
+    #resources :email_layouts
   end
 
 end

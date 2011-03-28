@@ -2,8 +2,7 @@
   <ul id="sub_nav">
     <%= hook :admin_email_sub_tabs do %>
       <%= tab :emails %>
-      <%= tab :subscribers %>
-      <%= tab :email_layouts, :css_class => 'last' %>
+      <%= tab :subscribers, :css_class => 'last' %>
     <% end %>
   </ul>
 <% end %>

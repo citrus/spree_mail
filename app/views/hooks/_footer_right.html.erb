@@ -1,0 +1,4 @@
+<%= form_for Subscriber.new do |form| %>
+    <%= form.text_field :email, :class => 'title required' %>
+    <%= form.submit t("sign_up") %>
+<% end %>

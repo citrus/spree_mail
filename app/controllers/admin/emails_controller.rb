@@ -5,12 +5,35 @@ class Admin::EmailsController < Admin::BaseController
   before_filter :get_subscribers, :only => [:new, :create, :edit, :update]
   before_filter :get_layouts, :only => [:new, :create, :edit, :update]
   
+  new_action.before do
+    @layouts = EmailLayout.all
+  end
+  
   create.success.wants.html {
     cookies[:current_email] = @email.token
     redirect_to admin_email_state_path("address") 
   }
 
+
+  def edit
+    @email = object
+    @email.state = params[:state] if params[:state]
+  end
+  
+
+  update.success.wants.html {
+    @email.next!
+    redirect_to admin_email_state_path(@email.state)
+  }
+
+
   destroy.success.wants.js { render_js_for_destroy }
+
+
+  
+  
+  
+  
 
   def deliver
     @email = object

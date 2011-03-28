@@ -2,7 +2,7 @@ en:
   spree_mail: Spree Mail
   newsletter_sign_up: Sign up for our Newsletter
   
-  email:
+  email_states:
     layout: layout
     address: address
     edit: compose
@@ -28,6 +28,9 @@ en:
   subscribe_success: "Thanks for signing up for our newsletter!"
   subscribe_failed: "Sorry, we could not sign you up."
   
+  layout_email: Layout Email
+  address_email: Address Email
+  
   emails: Emails
   listing_emails: Listing Emails
   show_email: Show Email
@@ -47,6 +50,8 @@ en:
   subject: Subject
   message_body: Message Body
   contact: Contact
+  
+  save_and_continue: Save & Continue
   
   delivery_success: Your email was successfully sent!
   delivery_failed: Sorry, your email could not be sent.

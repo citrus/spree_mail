@@ -5,18 +5,7 @@ class Email < ActiveRecord::Base
   validates :to,      :presence => true, :if => :state_is_address?
   validates :subject, :presence => true, :if => :state_is_edit?
   validates :body,    :presence => true, :if => :state_is_edit?
-  
-  
-  # Method missing for validation conditionals
-  def method_missing(method, *args, &block)
-    if matches = method.to_s.match(/state_is_([a-z]+)\?$/)
-      state.to_s == matches[1].to_s
-    else
-      super
-    end
-  end
-  
-      
+
   
   state_machine :state, :initial => :layout do
        
@@ -47,10 +36,12 @@ class Email < ActiveRecord::Base
     after_transition :to => :sent, :do => :deliver!
 
   end
-  
-  
+   
   
   # An attribute writer that ensures a non-empty hash  
+  #
+  #   @email.to = { "0" => "email@example.com", "1" => "someone@test.net" }
+  #
   def to=(value)
     value = {} unless value.is_a? Hash
     value.delete("0")
@@ -63,7 +54,7 @@ class Email < ActiveRecord::Base
     MailMethod.current.preferred_mails_from rescue "no-reply@spree-mail-example.com"
   end
   
-  # A hash of ids and emails
+  # Returns a hash of ids and emails    
   def recipients
     hash = eval(read_attribute(:to)) rescue {}  
     hash.values  
@@ -99,7 +90,21 @@ class Email < ActiveRecord::Base
     !self.sent_at.nil?
   end
   
-      
+  # Method missing for state validation conditionals
+  #
+  #   :state_is_address? # matches the address state
+  #   :state_is_foo?     # false since foo isn't a state
+  #   :bar_state?        # no method error
+  #
+  def method_missing(method, *args, &block)
+    if matches = method.to_s.match(/state_is_([a-z]+)\?$/)
+      state.to_s == matches[1].to_s
+    else
+      super
+    end
+  end
+  
+  
   class << self
     
     # Builds a new email with defaults

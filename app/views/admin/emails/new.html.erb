@@ -10,7 +10,11 @@
   <%= form_for(:email, :url => collection_url) do |f| %>
     <%= render :partial => "form", :locals => { :f => f } %>
     <%= hook :admin_email_new_form_buttons do %>
-      <%= render :partial => "admin/shared/new_resource_links" %>
+      <p class="form-buttons">
+        <button type="submit">
+          <span>Save &amp; Continue &rarr;</span>
+        </button>
+      </p>
     <% end %>
   <% end %>
 <% end %>

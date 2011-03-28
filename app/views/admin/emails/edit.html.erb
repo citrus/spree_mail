@@ -7,10 +7,15 @@
 <% end %>
 
 <%= hook :admin_email_new_form do %>
-  <%= form_for(:email, :url => collection_url) do |f| %>
+  <%= form_for([:admin, @email]) do |f| %>
+    
     <%= render :partial => "form", :locals => { :f => f } %>
-    <%= hook :admin_email_new_form_buttons do %>
-      <%= render :partial => "admin/shared/new_resource_links" %>
-    <% end %>
+
+    <p class="form-buttons">
+      <button type="submit">
+        <span><%= t('save_and_continue') %> &rarr;</span>
+      </button>
+    </p>
+    
   <% end %>
 <% end %>

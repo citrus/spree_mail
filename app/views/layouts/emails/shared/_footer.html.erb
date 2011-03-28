@@ -1,0 +1,6 @@
+<p style="font-size: 11px; color: #999;">
+  <%= t('message_sent_to_from_on',
+    :to => @subscriber.email,
+    :from => @email.from,
+    :on => l(@email.created_at, :format => "%b %d, %Y at %I:%M:%S %p")) %>.
+</p>

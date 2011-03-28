@@ -1,4 +1,8 @@
 <p>
-  <%= form.label :layout %>&nbsp;
-  <%= form.select :layout, @layouts.collect(&:name) %>
+  <% @layouts.each do |layout| %>
+    <%= form.radio_button :layout, layout.id %>
+    <%= form.label "layout_#{layout.id}", layout.name %>
+    <br/>
+    <%= image_tag layout.preview_url, :alt => "Layout" %>
+  <% end %>
 </p>

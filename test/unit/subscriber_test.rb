@@ -6,7 +6,7 @@ class SubscriberTest < Test::Unit::TestCase
     Subscriber.destroy_all
   end
 
-  should validate_presence_of(:name)
+  should_not validate_presence_of(:name)
   should allow_value(random_email).for(:email)
   should_not allow_value("invalid#email").for(:email)
   should have_readonly_attribute(:token)
@@ -21,9 +21,10 @@ class SubscriberTest < Test::Unit::TestCase
       assert !@new_subscriber.valid?
     end
     
-    should "have 2 errors" do
+    should "have an error on email" do
       @new_subscriber.valid?
-      assert_equal 2, @new_subscriber.errors.length
+      assert_equal 1, @new_subscriber.errors.length
+      assert @new_subscriber.errors.include?(:email)
     end
     
     should "create a random token" do
@@ -33,8 +34,14 @@ class SubscriberTest < Test::Unit::TestCase
       assert_not_equal token1, @new_subscriber.token
     end
     
-    should "save new subscriber" do
+    should "save new subscriber with name" do
       @new_subscriber.update_attributes(:name => "Mister Testman", :email => random_email)
+      assert @new_subscriber.valid?
+      assert @new_subscriber.save
+    end
+    
+    should "save new subscriber without name" do
+      @new_subscriber.update_attributes(:email => random_email)
       assert @new_subscriber.valid?
       assert @new_subscriber.save
     end

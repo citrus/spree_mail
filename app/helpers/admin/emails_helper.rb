@@ -6,7 +6,7 @@ module Admin
       steps = states.map do |state|
         current_index = states.index(@email.state.to_sym)
         state_index = states.index(state)
-        text = t("email.#{state}")
+        text = t("email_states.#{state}")
         if state_index <= current_index
           link_to text, admin_email_state_path(state)
         else

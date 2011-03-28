@@ -1,4 +1,15 @@
-<%- locals = {:f => f} %>
+<h3><%= t('select_subscribers') %>:</h3>
+<%= link_to t('select_all'), "#select-all" %> / 
+<%= link_to t('deselect_all'), "#deselect-all" %>
+<ul class="select">
+  <% @subscribers.each do |subscriber| %>
+    <li class="checkbox">
+      <%= check_box_tag "email[to][#{subscriber.id}]", subscriber.email, @email.recipients.include?(subscriber.email), :class => 'checkbox' %>
+      <%= label_tag "email[to][#{subscriber.id}]", truncate("#{subscriber.name} <#{subscriber.email}>", :length => 37), :class => 'checkbox' %>
+    </li>
+  <% end %>
+</ul>
+<%= hidden_field_tag "email[to][0]", "" %>
 
 <% content_for :head do %>
   <%= stylesheet_link_tag 'admin/spree_mail' %>
@@ -28,17 +39,4 @@
     });
   //]]>
   </script>  
-<% end %>
-
-<%= hook :admin_email_layout_form_fields, locals do %>
-  
-  <%= render "shared/error_messages", :target => @email_layout %>
-      
-  <%= f.field_container :name do %>
-    <%= f.label :name, t("name") %><br />
-    <%= f.text_field :name, :class => "title" %>
-    <%= error_message_on :email_layout, :name %>
-  <% end %>
-  
-  
 <% end %>
