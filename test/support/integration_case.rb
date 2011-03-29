@@ -16,10 +16,9 @@ class ActiveSupport::IntegrationCase < ActiveSupport::TestCase
   end
   
   def assert_flash(key, text)
-    within(".flash") do
+    within(".flash.#{key}") do
       assert_seen(text)
     end
   end
 
-  
 end

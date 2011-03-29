@@ -30,7 +30,7 @@ class SubscribersTest < ActiveSupport::IntegrationCase
     fill_in "Name", :with => "Someone"
     fill_in "Email", :with => "invalid"
     click_button I18n.t('sign_up')
-    assert_flash(:error, I18n.t('subscribe_failed'))
+    assert_flash(:errors, I18n.t('subscribe_failed'))
     within "#new_subscriber" do
       assert has_field?("Name", :with => "Someone")
       assert has_field?("Email", :with => "invalid")
@@ -60,7 +60,7 @@ class SubscribersTest < ActiveSupport::IntegrationCase
       end
       fill_in "Email", :with => random_email
       click_button I18n.t('unsubscribe')
-      assert_flash(:error, I18n.t('unsubscribe_failed_public'))
+      assert_flash(:errors, I18n.t('unsubscribe_failed_public'))
     end
     
     should "succeed to unsubscribe" do
@@ -68,7 +68,7 @@ class SubscribersTest < ActiveSupport::IntegrationCase
       assert has_content?(I18n.t('unsubscribe_title'))      
       fill_in "Email", :with => @subscriber.email
       click_button I18n.t('unsubscribe')
-      assert_flash(:error, I18n.t('unsubscribe_success_public'))
+      assert_flash(:errors, I18n.t('unsubscribe_success_public'))
     end
     
     should "succeed to unsubscribe" do
@@ -76,7 +76,7 @@ class SubscribersTest < ActiveSupport::IntegrationCase
       assert has_content?(I18n.t('unsubscribe_title'))      
       fill_in "Email", :with => @subscriber.email
       click_button I18n.t('unsubscribe')
-      assert_flash(:error, I18n.t('unsubscribe_success_public'))
+      assert_flash(:notice, I18n.t('unsubscribe_success_public'))
     end
     
     should "not be able to re-unsubscribe" do

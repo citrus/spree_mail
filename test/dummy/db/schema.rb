@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110131081738) do
+ActiveRecord::Schema.define(:version => 20110329064656) do
 
   create_table "addresses", :force => true do |t|
     t.string   "firstname"
@@ -87,6 +87,17 @@ ActiveRecord::Schema.define(:version => 20110131081738) do
     t.string  "name"
     t.string  "iso3"
     t.integer "numcode"
+  end
+
+  create_table "coupons", :force => true do |t|
+    t.string   "code"
+    t.string   "description"
+    t.integer  "usage_limit"
+    t.boolean  "combine"
+    t.datetime "expires_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "starts_at"
   end
 
   create_table "creditcards", :force => true do |t|
@@ -320,14 +331,6 @@ ActiveRecord::Schema.define(:version => 20110131081738) do
   add_index "products", ["name"], :name => "index_products_on_name"
   add_index "products", ["permalink"], :name => "index_products_on_permalink"
 
-  create_table "products_promotion_rules", :id => false, :force => true do |t|
-    t.integer "product_id"
-    t.integer "promotion_rule_id"
-  end
-
-  add_index "products_promotion_rules", ["product_id"], :name => "index_products_promotion_rules_on_product_id"
-  add_index "products_promotion_rules", ["promotion_rule_id"], :name => "index_products_promotion_rules_on_promotion_rule_id"
-
   create_table "products_taxons", :id => false, :force => true do |t|
     t.integer "product_id"
     t.integer "taxon_id"
@@ -335,39 +338,6 @@ ActiveRecord::Schema.define(:version => 20110131081738) do
 
   add_index "products_taxons", ["product_id"], :name => "index_products_taxons_on_product_id"
   add_index "products_taxons", ["taxon_id"], :name => "index_products_taxons_on_taxon_id"
-
-  create_table "promotion_rules", :force => true do |t|
-    t.integer  "promotion_id"
-    t.integer  "user_id"
-    t.integer  "product_group_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "type"
-  end
-
-  add_index "promotion_rules", ["product_group_id"], :name => "index_promotion_rules_on_product_group_id"
-  add_index "promotion_rules", ["user_id"], :name => "index_promotion_rules_on_user_id"
-
-  create_table "promotion_rules_users", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "promotion_rule_id"
-  end
-
-  add_index "promotion_rules_users", ["promotion_rule_id"], :name => "index_promotion_rules_users_on_promotion_rule_id"
-  add_index "promotion_rules_users", ["user_id"], :name => "index_promotion_rules_users_on_user_id"
-
-  create_table "promotions", :force => true do |t|
-    t.string   "code"
-    t.string   "description"
-    t.integer  "usage_limit"
-    t.boolean  "combine"
-    t.datetime "expires_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "starts_at"
-    t.string   "match_policy", :default => "all"
-    t.string   "name"
-  end
 
   create_table "properties", :force => true do |t|
     t.string   "name"
