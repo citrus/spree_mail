@@ -70,15 +70,7 @@ class SubscribersTest < ActiveSupport::IntegrationCase
       click_button I18n.t('unsubscribe')
       assert_flash(:error, I18n.t('unsubscribe_success_public'))
     end
-    
-    should "succeed to unsubscribe" do
-      visit subscriber_path(@subscriber)      
-      assert has_content?(I18n.t('unsubscribe_title'))      
-      fill_in "Email", :with => @subscriber.email
-      click_button I18n.t('unsubscribe')
-      assert_flash(:error, I18n.t('unsubscribe_success_public'))
-    end
-    
+        
     should "not be able to re-unsubscribe" do
       # unsubscriber..
       @subscriber.unsubscribe!

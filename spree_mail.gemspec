@@ -17,8 +17,6 @@ Gem::Specification.new do |s|
   
   s.require_paths = ["lib"]
 
-  s.has_rdoc = false
-
   s.add_dependency('spree_core',    '>= 0.30.1')
   s.add_dependency('spree_auth',    '>= 0.30.1')
   s.add_dependency('mustache',      '>= 0.12.0')
@@ -28,7 +26,7 @@ Gem::Specification.new do |s|
   
 	s.add_development_dependency('shoulda', '>= 2.11.3')
 	s.add_development_dependency('capybara', '>= 0.4.1')
-	s.add_development_dependency('selenium-webdriver', '>= 0.1.3')
+	s.add_development_dependency('selenium-webdriver', '>= 0.1.4')
   s.add_development_dependency('sqlite3')
 	
 end
