@@ -7,7 +7,7 @@ class Subscriber < ActiveRecord::Base
   scope :active, where("unsubscribed_at IS NULL").order(:name)
   scope :unsubscribed, where("unsubscribed_at IS NOT NULL").order(:name)
   
-  validates :name,  :presence => true
+  #validates :name,  :presence => true
   validates :email, :email => true, :uniqueness => true
     
   def active?

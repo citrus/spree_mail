@@ -35,7 +35,7 @@
       <tr id="<%= dom_id subscriber %>">
         <%- locals = {:subscriber => subscriber} %>
         <%= hook :admin_subscribers_index_rows, locals do %>
-          <td><%=link_to subscriber.name, object_url(subscriber) %></td>
+          <td><%=link_to subscriber.name || "(anonymous)", object_url(subscriber) %></td>
           <td><%= mail_to subscriber.email %></td>
         <% end %>
         <td>

@@ -20,6 +20,8 @@ en:
   subscribe_success: "Thanks for signing up for our newsletter!"
   subscribe_failed: "Sorry, we could not sign you up."
   
+  subscribe_newsletter_too: "Sign up for our newsletter"
+  
   listing_emails: Listing Emails
   show_email: Show Email
   new_email: New Email
