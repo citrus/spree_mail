@@ -3,9 +3,13 @@ Rails.application.routes.draw do
   get "/email/:subscriber/:email", :to => "emails#show", :as => :read_email
   get "/subscribers" => redirect("/subscribers/new")
   
+  get "/subscribe" => "subscribers#subscribe"
+  
   resources :subscribers, :except => [:index,:edit,:update] do
-    put :unsubscribe,  :on => :member
-    put :resubscribe,  :on => :member
+    member do
+      put :unsubscribe
+      get :resubscribe
+    end
   end
   
   namespace(:admin) do

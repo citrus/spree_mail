@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class SubscriberTest < Test::Unit::TestCase
 
@@ -6,7 +6,6 @@ class SubscriberTest < Test::Unit::TestCase
     Subscriber.destroy_all
   end
 
-  should validate_presence_of(:name)
   should allow_value(random_email).for(:email)
   should_not allow_value("invalid#email").for(:email)
   should have_readonly_attribute(:token)
@@ -21,9 +20,9 @@ class SubscriberTest < Test::Unit::TestCase
       assert !@new_subscriber.valid?
     end
     
-    should "have 2 errors" do
+    should "have one error" do
       @new_subscriber.valid?
-      assert_equal 2, @new_subscriber.errors.length
+      assert_equal 1, @new_subscriber.errors.length
     end
     
     should "create a random token" do

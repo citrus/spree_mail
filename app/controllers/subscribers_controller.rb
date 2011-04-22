@@ -1,6 +1,6 @@
 class SubscribersController < Spree::BaseController
 
-  before_filter :get_subscriber, :only => [:show, :unsubscribe]
+  before_filter :get_subscriber, :only => [:show, :unsubscribe, :resubscribe]
   
   def new
     @subscriber = Subscriber.new
@@ -24,7 +24,7 @@ class SubscribersController < Spree::BaseController
   def unsubscribe
     if @subscriber.email == params[:subscriber][:email] && @subscriber.unsubscribe!
       flash[:notice] = t('unsubscribe_success_public')
-      redirect_to new_subscriber_path
+      redirect_to current_user ? account_path : new_subscriber_path
     else
       flash[:error]  = t('unsubscribe_failed_public')    
       redirect_to subscriber_path(@subscriber)
@@ -32,19 +32,35 @@ class SubscribersController < Spree::BaseController
   end
   
   def resubscribe
-    if @subscriber.email == params[:subscriber][:email] && @subscriber.resubscribe!
-      flash[:notice] = t('resubscribe_success_public')
+    if @subscriber.resubscribe!
+      flash[:notice] = t('subscribe_success_public')
       redirect_to current_user ? account_path : subscriber_path
     else
-      flash[:error]  = t('resubscribe_failed_public')    
+      flash[:error]  = t('subscribe_failed_public')    
       redirect_to resubscribe_subscriber_path(@subscriber)
     end
+  end
+  
+  def subscribe
+    return redirect_to(new_subscriber_path) unless current_user
+    @subsciber = Subscriber.find_by_email(current_user.email) rescue nil
+    return redirect_to(account_path) if @subscriber && @subscriber.active?
+    @subscriber = Subscriber.new(:email => current_user.email)    
+    if @subscriber.save
+      flash[:notice] = t('subscribe_success_public')
+      redirect_to account_path
+    else
+      flash[:error]  = t('subscribe_failed_public')
+      redirect_to new_subscriber_path
+    end
+    
   end
     
   private
   
     def get_subscriber
       @subscriber = Subscriber.find_by_token(params[:id])
+      return redirect_to(new_subscriber_path) unless @subscriber
     end
   
 end

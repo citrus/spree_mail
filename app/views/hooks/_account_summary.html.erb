@@ -1,12 +1,17 @@
 <h2><%= t('newsletter') %></h2>
 <% if @subscriber && @subscriber.active? %>
   <p>
-    <%= t('newsletter_account') %><br/>
+    <%= t('newsletter_signed_up') %><br/>
     <%= link_to t('unsubscribe'), subscriber_path(@subscriber) %>
   </p>    
-<% elsif @subscriber %>
+<% else %>
   <p>
     <%= t('newsletter_signup') %><br/>
-    <%= link_to t('resubscribe'), resubscribe_subscriber_path(@subscriber) %>
-  </p>
+    
+    <% if @subscriber %>  
+      <%= link_to t('subscribe'), resubscribe_subscriber_path(@subscriber) %>
+    <% else %>
+      <%= link_to t('subscribe'), subscribe_path %>
+    <% end %>
+
 <% end %>

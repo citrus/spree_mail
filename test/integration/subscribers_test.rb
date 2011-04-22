@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class SubscribersTest < ActiveSupport::IntegrationCase
   
@@ -20,26 +20,22 @@ class SubscribersTest < ActiveSupport::IntegrationCase
     visit new_subscriber_path
     assert has_content?(I18n.t('newsletter_text_signup'))
     within "#new_subscriber" do
-      assert has_field?("Name")
       assert has_field?("Email")
     end
   end
   
   should "validate subscriber" do
     visit new_subscriber_path
-    fill_in "Name", :with => "Someone"
     fill_in "Email", :with => "invalid"
     click_button I18n.t('sign_up')
     assert_flash(:errors, I18n.t('subscribe_failed'))
     within "#new_subscriber" do
-      assert has_field?("Name", :with => "Someone")
       assert has_field?("Email", :with => "invalid")
     end
   end
   
   should "create subscriber" do
     visit new_subscriber_path
-    fill_in "Name", :with => "Sample McTesterman"
     fill_in "Email", :with => random_email
     click_button I18n.t('sign_up')
     assert_flash(:notice, I18n.t('subscribe_success'))

@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class SubscribersControllerTest < ActionController::TestCase
   
@@ -13,7 +13,7 @@ class SubscribersControllerTest < ActionController::TestCase
   end
   
   should "validate subscriber" do
-    post :create, :subscriber => { :name => "", :email => "" }
+    post :create, :subscriber => { :email => "" }
     assert_response :success
     assert !flash.empty?
     assert_equal I18n.t('subscribe_failed'), flash[:error]
@@ -21,7 +21,7 @@ class SubscribersControllerTest < ActionController::TestCase
   
   should "create subscriber" do
     email = random_email
-    post :create, :subscriber => { :name => "Subby Subscriptor", :email => email }
+    post :create, :subscriber => { :email => email }
     assert_not_nil Subscriber.find_by_email(email)
     assert_response :redirect, new_subscriber_path
     assert !flash.empty?
@@ -49,7 +49,7 @@ class SubscribersControllerTest < ActionController::TestCase
     
     setup do
       @email = random_email
-      @subscriber = Subscriber.create(:name => "Clicky VonHackaton", :email => @email)
+      @subscriber = Subscriber.create(:email => @email)
     end
     
     should "render show" do

@@ -3,6 +3,9 @@ en:
   newsletter_sign_up: Sign up for our Newsletter
   
   newsletter: Newsletter
+  newsletter_signed_up: You're currently enrolled in our newsletter!
+  newsletter_signup: You're currently not a subscriber to our newsletter. Click below to become a subscriber!
+  subscribe: Subscribe to our Newsletter
   
   subscribers: Subscribers
   listing_subscribers: Listing Subscribers
@@ -12,9 +15,12 @@ en:
   view_unsubscribed: View Unsubscribed
   view_all_subscribers: View All Subscribers
   
+  
   resubscribe: Resubscribe
   resubscribe_success: "Successfully Resubscribed"
   resubscribe_failed: "Resubscribe Failed"
+  subscribe_success_public: "You were successfully added to the mailing list!"
+  subscribe_success_failed: "We're sorry, we could not add you to the mailing list. "
   unsubscribe_success: "Successfully Unsubscribed"
   unsubscribe_success_public: "You were successfully unsubscribed from the mailing list."
   unsubscribe_failed: "Unsubscribed failed"
