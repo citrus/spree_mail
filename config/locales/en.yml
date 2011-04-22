@@ -2,6 +2,8 @@ en:
   spree_mail: Spree Mail
   newsletter_sign_up: Sign up for our Newsletter
   
+  newsletter: Newsletter
+  
   subscribers: Subscribers
   listing_subscribers: Listing Subscribers
   show_subscriber: Show Subscriber

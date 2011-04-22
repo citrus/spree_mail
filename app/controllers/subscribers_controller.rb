@@ -30,6 +30,16 @@ class SubscribersController < Spree::BaseController
       redirect_to subscriber_path(@subscriber)
     end
   end
+  
+  def resubscribe
+    if @subscriber.email == params[:subscriber][:email] && @subscriber.resubscribe!
+      flash[:notice] = t('resubscribe_success_public')
+      redirect_to current_user ? account_path : subscriber_path
+    else
+      flash[:error]  = t('resubscribe_failed_public')    
+      redirect_to resubscribe_subscriber_path(@subscriber)
+    end
+  end
     
   private
   

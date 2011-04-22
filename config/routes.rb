@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   
   resources :subscribers, :except => [:index,:edit,:update] do
     put :unsubscribe,  :on => :member
+    put :resubscribe,  :on => :member
   end
   
   namespace(:admin) do
