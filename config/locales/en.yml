@@ -52,7 +52,7 @@ en:
   view_in_browser: to view this email in your browser
   visit_online: visit us online at
 
-  received_in_error: "This is a message from the %{site_name} if you believe you have received this in error please let us know."
+  received_in_error: "This is a message from %{site_name}. If you believe you have received this in error please let us know."
   message_sent_to_from_on: "This message was sent to %{to} from %{from} on %{on}."
   
   unsubscribe_title: Unsubscribe from our Mailing List
