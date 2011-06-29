@@ -1,0 +1,73 @@
+pt-BR:
+  spree_mail: Spree Mail
+  newsletter_sign_up: Cadastre-se para nossa Newsletter
+  
+  newsletter: Newsletter
+  newsletter_signed_up: Você já está cadastrado em nossa newsletter!
+  newsletter_signup: Você não é um assinante da nossa newsletter atualmente. Clique abaixo para assinar! 
+  subscribe: Assine nossa newsletter Newsletter
+  
+  subscribers: Assinantes
+  listing_subscribers: Lista de Assinantes
+  show_subscriber: Exibir Assinante
+  new_subscriber: Novo Assinante
+  editing_subscriber: Editando Assinante
+  view_unsubscribed: Exibir descadastrados
+  view_all_subscribers: Ver todos os Assinantes
+  
+  
+  resubscribe: Recadastrar
+  resubscribe_success: "Recadastrado com sucesso"
+  resubscribe_failed: "Recadastramento falhou"
+  subscribe_success_public: "Você foi adicionado(a) com sucesso à lista de emails"
+  subscribe_success_failed: "Desculpe-nos, não foi possível adicioná-lo(a) à lista de emails"
+  unsubscribe_success: "Descadastrado com sucesso"
+  unsubscribe_success_public: "Você foi descadastrado(a) com sucesso da lista de emails"
+  unsubscribe_failed: "Descadastramento falhou"
+  unsubscribe_failed_public: "Desculpe-nos, não foi possível descastrá-lo(a) dessa vez"
+  subscribe_success: "Obrigado por assinar nossa newsletter!"
+  subscribe_failed: "Desculpe, não foi possível cadastrá-lo."
+  
+  subscribe_newsletter_too: "Cadastre-se em nossa newsletter"
+  
+  listing_emails: Exibindo Emails
+  show_email: Exibir Email
+  new_email: Novo Email
+  editing_email: Editando Email
+  unintened_email_view: Esse email não era direcionado para você.
+  emails: Emails
+  
+  to: Para
+  send: Enviar
+  body: Corpo
+  subject: Assunto
+  message_body: Corpo da Mensagem
+  contact: Contato
+  
+  delivery_success: Seu email foi enviado com sucesso!
+  delivery_failed: "Desculpe, seu email não pode ser enviado."
+  
+  unsubscribe_text: Se você quiser se descadastrar
+  click_here: Click aqui
+  view_in_browser: para ver esse email no seu navegador
+  visit_online: visite-nos em
+
+  received_in_error: "Essa é uma mensagem de %{site_name}. Se você acredita que recebeu isso por engano, por favor, entre em contato"
+  message_sent_to_from_on: "This message was sent to %{to} from %{from} on %{on}."
+  
+  unsubscribe_title: Descadastrar da nossa lista de email
+  unsubscribe_mail: "Por favor, informe seu email abaixo"
+  unsubscribe: Descadastrar
+  
+  select_subscribers: Selecione os assinantes
+  select_all: Selecionar Todos
+  deselect_all: Deselecionar Todos
+  message_details: Detalhes da Mensagem
+
+  sign_up_for_our_newsletter: Cadastrar para a nossa newsletter
+  newsletter_text_signup: Lorem Ipsum dolor sit amet...
+
+  activerecord:
+    errors:
+      messages:
+        invalid_email: parece ser inválido
