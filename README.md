@@ -64,6 +64,17 @@ To Do
 * Maybe add a wysiwyg editor for email composition
 
 
+Contributors
+------------
+
+* Spencer Steffen - github.com/citrus
+* Alberto Vena    - github.com/kennyadsl
+* Thiago Temple   - github.com/vintem 
+
+If you'd like to help out feel free to fork and send me pull requests!
+
+
+
 License
 -------
 
